@@ -18,7 +18,7 @@
    &kp LSHFT &kp Z    &kp X &kp C  &kp D     &kp V       &kp K    &kp H &kp COMMA &kp DOT &kp FSLH &kp RET
    &kp LCTRL &kp LGUI              &kp SPACE &mo 2       &mo 3    &lt 4 RET               &kp LALT &kp RGUI
                                     // DPAD Left, Down, Middle, Up, Right
-                        &kp HOME  &kp C_AC_SCROLL_DOWN  &kp K_MUTE   &kp C_AC_SCROLL_UP &kp END
+                        &kp HOME  &kp K_SCROLL_DOWN  &kp K_MUTE   &kp K_SCROLL_UP &kp END
                         >;
                 };
                 qwerty {
@@ -28,7 +28,7 @@
    &kp LSHFT &kp Z    &kp X &kp C  &kp V     &kp B       &kp N    &kp M &kp COMMA &kp DOT &kp FSLH &kp ESC
    &kp LCTRL &kp LGUI              &kp SPACE &mo 2       &mo 3    &lt 4 RET               &kp LALT &kp RGUI
                                     // DPAD Left, Down, Middle, Up, Right
-                        &kp HOME  &kp C_AC_SCROLL_DOWN  &kp K_MUTE   &kp C_AC_SCROLL_UP &kp END
+                        &kp HOME  &kp K_SCROLL_DOWN  &kp K_MUTE   &kp K_SCROLL_UP &kp END
                         >;
                 };
                 lower_layer {
@@ -43,10 +43,10 @@
                 };
                 upper_layer {
                         bindings = <
-   &kp GRAVE &kp EXCL &kp AT &kp HASH &kp DLLR  &kp PRCNT        &kp CARET &kp AMPS  &kp ASTRK &kp LPAR &kp RPAR &kp DEL
-   &kp TAB   &none    &none  &kp LBRC &kp RBRC  &kp GRAVE        &none     &kp LBKT  &kp RBKT  &none    &none    &none
-   &kp LSHFT &none    &none  &kp LPAR &kp RPAR  &none            &none     &kp LBRC  &kp RBRC  &none    &none    &none
-   &kp LCTRL &kp LGUI                 &kp SPACE &mo 5            &trans    &kp SPACE                    &kp LALT &kp RGUI
+   &kp GRAVE &kp EXCL &kp AT &kp HASH  &kp DLLR  &kp PRCNT        &kp CARET &kp AMPS  &kp ASTRK &kp LPAR &kp RPAR &kp DEL
+   &kp TAB   &none    &none  &kp LCTRL &kp ESC   &kp GRAVE        &kp BSPC  &kp LBKT  &kp RBKT  &none    &none    &none
+   &kp LSHFT &none    &none  &none     &none     &none            &none     &kp LBRC  &kp RBRC  &none    &none    &none
+   &kp LCTRL &kp LGUI                  &kp SPACE &mo 5            &trans    &kp SPACE                    &kp LALT &kp RGUI
                                     // DPAD Left, Down, Middle, Up, Right
                                     &none &kp C_BRI_DN  &none &kp C_BRI_UP &none
                         >;
