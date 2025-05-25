@@ -1,11 +1,74 @@
+#include <physical_layouts.dtsi>
 #include <dt-bindings/zmk/matrix_transform.h>
 
 / {
-    default_layout: default_layout {
+    physical_layout0: physical_layout_0 {
         compatible = "zmk,physical-layout";
         display-name = "Default Layout";
         transform = <&default_transform>;
         kscan = <&kscan0>;
+
+        keys  //                     w   h    x    y     rot    rx    ry
+            = <&key_physical_attrs 100 100    0  100       0     0     0>
+            , <&key_physical_attrs 100 100  100   75       0     0     0>
+            , <&key_physical_attrs 100 100  200   25       0     0     0>
+            , <&key_physical_attrs 100 100  300    0       0     0     0>
+            , <&key_physical_attrs 100 100  400   50       0     0     0>
+            , <&key_physical_attrs 100 100  500   75       0     0     0>
+            , <&key_physical_attrs 100 100 1100   75       0     0     0>
+            , <&key_physical_attrs 100 100 1200   50       0     0     0>
+            , <&key_physical_attrs 100 100 1300    0       0     0     0>
+            , <&key_physical_attrs 100 100 1400   25       0     0     0>
+            , <&key_physical_attrs 100 100 1500   50       0     0     0>
+            , <&key_physical_attrs 100 100 1600   75       0     0     0>
+            , <&key_physical_attrs 100 100    0  200       0     0     0>
+            , <&key_physical_attrs 100 100  100  175       0     0     0>
+            , <&key_physical_attrs 100 100  200  125       0     0     0>
+            , <&key_physical_attrs 100 100  300  100       0     0     0>
+            , <&key_physical_attrs 100 100  400  150       0     0     0>
+            , <&key_physical_attrs 100 100  500  175       0     0     0>
+            , <&key_physical_attrs 100 100 1100  175       0     0     0>
+            , <&key_physical_attrs 100 100 1200  150       0     0     0>
+            , <&key_physical_attrs 100 100 1300  100       0     0     0>
+            , <&key_physical_attrs 100 100 1400  125       0     0     0>
+            , <&key_physical_attrs 100 100 1500  150       0     0     0>
+            , <&key_physical_attrs 100 100 1600  175       0     0     0>
+            , <&key_physical_attrs 100 100    0  300       0     0     0>
+            , <&key_physical_attrs 100 100  100  275       0     0     0>
+            , <&key_physical_attrs 100 100  200  225       0     0     0>
+            , <&key_physical_attrs 100 100  300  200       0     0     0>
+            , <&key_physical_attrs 100 100  400  250       0     0     0>
+            , <&key_physical_attrs 100 100  500  275       0     0     0>
+            , <&key_physical_attrs 100 100 1100  275       0     0     0>
+            , <&key_physical_attrs 100 100 1200  250       0     0     0>
+            , <&key_physical_attrs 100 100 1300  200       0     0     0>
+            , <&key_physical_attrs 100 100 1400  225       0     0     0>
+            , <&key_physical_attrs 100 100 1500  250       0     0     0>
+            , <&key_physical_attrs 100 100 1600  275       0     0     0>
+            , <&key_physical_attrs 100 100    0  400       0     0     0>
+            , <&key_physical_attrs 100 100  100  375       0     0     0>
+            , <&key_physical_attrs 100 100  400  350       0     0     0>
+            , <&key_physical_attrs 100 100  500  375       0     0     0>
+            , <&key_physical_attrs 100 100 1100  375       0     0     0>
+            , <&key_physical_attrs 100 100 1200  350       0     0     0>
+            , <&key_physical_attrs 100 100 1500  350       0     0     0>
+            , <&key_physical_attrs 100 100 1600  375       0     0     0>
+            , <&key_physical_attrs 100 100  700  400       0     0     0>
+            , <&key_physical_attrs 100 100  800  500       0     0     0>
+            , <&key_physical_attrs 100 100  800  400       0     0     0>
+            , <&key_physical_attrs 100 100  800  300       0     0     0>
+            , <&key_physical_attrs 100 100  900  400       0     0     0>
+            ;
+    };
+
+    position_map {
+        compatible = "zmk,physical-layout-position-map";
+        complete;
+
+        physical_layout0 {
+            physical-layout = <&physical_layout0>;
+            positions = <>;
+        };
     };
 };
 
