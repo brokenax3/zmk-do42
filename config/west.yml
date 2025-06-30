@@ -18,7 +18,7 @@ manifest:
       revision: pr-testing/mouse_ps2_module_base
       import: app/west.yml
     - name: kb_zmk_ps2_mouse_trackpoint_driver
-      remote: brokenax3
-      revision: testing
+      remote: infused-kim
+      revision: main
   self:
     path: config
