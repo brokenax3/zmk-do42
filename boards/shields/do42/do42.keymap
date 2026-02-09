@@ -22,6 +22,49 @@
                 };
         };
 
+        combos {
+                compatible = "zmk,combos";
+
+                // Q + W = Escape (left top row, positions 1+2)
+                combo_esc {
+                        timeout-ms = <30>;
+                        key-positions = <1 2>;
+                        bindings = <&kp ESC>;
+                        require-prior-idle-ms = <150>;
+                };
+
+                // Y + ; = Backspace on Colemak / O + P on QWERTY (right top row, positions 9+10)
+                combo_bspc {
+                        timeout-ms = <30>;
+                        key-positions = <9 10>;
+                        bindings = <&kp BSPC>;
+                        require-prior-idle-ms = <150>;
+                };
+
+                // L + U = Delete on Colemak / U + I on QWERTY (right top row, positions 7+8)
+                combo_del {
+                        timeout-ms = <30>;
+                        key-positions = <7 8>;
+                        bindings = <&kp DEL>;
+                        require-prior-idle-ms = <150>;
+                };
+
+                // W + F = Tab on Colemak / W + E on QWERTY (left top row, positions 2+3)
+                combo_tab {
+                        timeout-ms = <30>;
+                        key-positions = <2 3>;
+                        bindings = <&kp TAB>;
+                        require-prior-idle-ms = <150>;
+                };
+
+                // Left space + Right LT = Caps Word (thumb positions 38+41)
+                combo_caps_word {
+                        timeout-ms = <50>;
+                        key-positions = <38 41>;
+                        bindings = <&caps_word>;
+                };
+        };
+
         keymap {
                 compatible = "zmk,keymap";
                 colemak { //0
