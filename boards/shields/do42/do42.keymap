@@ -125,13 +125,6 @@
             bindings = <&kp BSPC>;
         };
 
-        combo_caps_word {                   // Left Space + Right LT = Caps Word
-            timeout-ms = <50>;
-            key-positions = <38 41>;
-            layers = <0>;
-            bindings = <&caps_word>;
-        };
-
         /* ── High-Frequency Symbol Combos ───────────────────────────── */
 
         combo_colon {                       // S + T = : (Vim command mode)
@@ -256,8 +249,8 @@
             bindings = <
 // ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐    ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐
     &kp ESC   &kp N1    &kp N2    &kp N3    &kp N4    &kp N5         &kp N6    &kp N7    &kp N8    &kp N9    &kp N0    &kp BSPC
-    &kp TAB   &kp GRAVE &kp MINUS &kp EQUAL &kp FSLH  &kp BSLH       &kp LPAR  &kp RPAR  &kp LBKT  &kp RBKT  &kp COLON &kp SEMI
-    &kp LSHFT &kp TILDE &kp UNDER &kp PIPE  &kp PLUS  &kp DQT        &kp LBRC  &kp RBRC  &kp LT    &kp GT    &kp QMARK &kp DEL
+    &kp TAB   &kp PRCNT &kp MINUS &kp EQUAL &kp FSLH  &kp BSLH       &kp LPAR  &kp RPAR  &kp LBKT  &kp RBKT  &kp COLON &kp SEMI
+    &kp LSHFT &kp EXCL  &kp UNDER &kp PIPE  &kp PLUS  &kp DQT        &kp LBRC  &kp RBRC  &kp LT    &kp GT    &kp QMARK &kp DEL
     &kp LGUI  &kp LALT                      &kp SPACE &trans         &mo 5     &kp SPACE                     &kp RALT  &kp LCTRL
 // └─────────┴─────────┘                    └─────────┴─────────┘    └─────────┴─────────┘                    └─────────┴─────────┘
                                             &kp LEFT  &kp DOWN       &none     &kp UP    &kp RIGHT
@@ -270,7 +263,7 @@
 // ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐    ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐
     &kp TILDE &kp EXCL  &kp AT    &kp HASH  &kp DLLR  &kp PRCNT      &kp CARET &kp AMPS  &kp ASTRK &kp LPAR  &kp RPAR  &kp DEL
     &kp TAB   &kp DQT   &kp SQT   &kp GRAVE &kp PIPE  &kp BSLH       &kp LEFT  &kp DOWN  &kp UP    &kp RIGHT &kp COLON &none
-    &kp LSHFT &none     &none     &none     &none     &none          &none     &kp PGDN  &kp PGUP  &kp HOME  &kp END   &kp RET
+    &kp LSHFT &none     &none     &none     &none     &none          &none     &kp HOME  &kp PGDN  &kp PGUP  &kp END   &kp RET
     &kp LGUI  &kp LALT                      &kp SPACE &mo 5          &trans    &kp SPACE                     &kp RALT  &kp LCTRL
 // └─────────┴─────────┘                    └─────────┴─────────┘    └─────────┴─────────┘                    └─────────┴─────────┘
                                             &none     &kp C_BRI_DN   &none     &kp C_BRI_UP &none

@@ -120,9 +120,9 @@ row. No cross-layer duplication.
 ┌───────┬───────┬───────┬───────┬───────┬───────┐    ┌───────┬───────┬───────┬───────┬───────┬───────┐
 │  ESC  │   1   │   2   │   3   │   4   │   5   │    │   6   │   7   │   8   │   9   │   0   │ BSPC  │
 ├───────┼───────┼───────┼───────┼───────┼───────┤    ├───────┼───────┼───────┼───────┼───────┼───────┤
-│  TAB  │   `   │   -   │   =   │   /   │   \   │    │   (   │   )   │   [   │   ]   │   :   │   ;   │
+│  TAB  │   %   │   -   │   =   │   /   │   \   │    │   (   │   )   │   [   │   ]   │   :   │   ;   │
 ├───────┼───────┼───────┼───────┼───────┼───────┤    ├───────┼───────┼───────┼───────┼───────┼───────┤
-│ LSHFT │   ~   │   _   │   |   │   +   │   "   │    │   {   │   }   │   <   │   >   │   ?   │  DEL  │
+│ LSHFT │   !   │   _   │   |   │   +   │   "   │    │   {   │   }   │   <   │   >   │   ?   │  DEL  │
 ├───────┼───────┼───────┴───────┼───────┼───────┤    ├───────┼───────┼───────┴───────┼───────┼───────┤
 │ LGUI  │ LALT  │               │ SPACE │ ▓▓▓▓▓ │    │  mo5  │ SPACE │               │ RALT  │ LCTRL │
 └───────┴───────┘               └───────┴───────┘    └───────┴───────┘               └───────┴───────┘
@@ -135,7 +135,7 @@ row. No cross-layer duplication.
 - `/` (index) - Division, paths, Vim search
 - `=` (middle) - Assignment, comparison — highest frequency operator
 - `-` (ring) - Subtraction, lists, kebab-case
-- `` ` `` (pinky) - Backtick: Markdown code, Golang raw strings, shell
+- `%` (pinky) - Modulo, Python string formatting, percentage
 
 **Home row right** (strongest → weakest finger):
 - `( )` (index pair) - Function calls, tuples, precedence
@@ -147,7 +147,7 @@ row. No cross-layer duplication.
 - `+` (index) - Addition
 - `|` (middle) - Unix pipes, logical OR
 - `_` (ring) - snake_case, Markdown italics
-- `~` (pinky) - Home directory, bitwise NOT
+- `!` (pinky) - Negation, shebang, inequality (`!=`)
 
 **Bottom row right:**
 - `{ }` (index pair) - Code blocks, dicts, structs
@@ -171,7 +171,7 @@ moving windows between workspaces.
 ├───────┼───────┼───────┼───────┼───────┼───────┤    ├───────┼───────┼───────┼───────┼───────┼───────┤
 │  TAB  │   "   │   '   │   `   │   |   │   \   │    │  LEFT │ DOWN  │  UP   │ RIGHT │   :   │       │
 ├───────┼───────┼───────┼───────┼───────┼───────┤    ├───────┼───────┼───────┼───────┼───────┼───────┤
-│ LSHFT │       │       │       │       │       │    │       │ PGDN  │ PGUP  │ HOME  │  END  │  RET  │
+│ LSHFT │       │       │       │       │       │    │       │ HOME  │ PGDN  │ PGUP  │  END  │  RET  │
 ├───────┼───────┼───────┴───────┼───────┼───────┤    ├───────┼───────┼───────┴───────┼───────┼───────┤
 │ LGUI  │ LALT  │               │ SPACE │  mo5  │    │ ▓▓▓▓▓ │ SPACE │               │ RALT  │ LCTRL │
 └───────┴───────┘               └───────┴───────┘    └───────┴───────┘               └───────┴───────┘
@@ -184,11 +184,11 @@ Arrow keys on home row right (Vim-style HJKL positions):
 
 ```
 HOME ROW:           LEFT   DOWN   UP     RIGHT
-BOTTOM ROW:                PGDN   PGUP   HOME   END
+BOTTOM ROW:         HOME   PGDN   PGUP   END
 ```
 
-Page navigation sits **directly below** the arrow keys for logical spatial
-grouping: DOWN→PGDN, UP→PGUP, with HOME/END to the right.
+Each navigation key sits **directly below** its directional counterpart:
+LEFT→HOME, DOWN→PGDN, UP→PGUP, RIGHT→END.
 
 ### String Delimiters
 
@@ -270,7 +270,6 @@ Default timeout: 45ms. Require prior idle: 150ms.
 | Tab       | W + F          | 2 + 3     | `TAB`    | Indentation, completion     |
 | Delete    | L + U          | 7 + 8     | `DEL`    | Forward delete              |
 | Backspace | Y + ;          | 9 + 10    | `BSPC`   | Delete backward             |
-| Caps Word | Space + lt4    | 38 + 41   | CapsWord | SCREAMING_SNAKE_CASE (50ms) |
 
 ### High-Frequency Symbol Combos
 
@@ -316,7 +315,7 @@ Quick reference for finding any symbol across layers and combos.
 | `$`    | A+R           | -       | Shift+4     | Combo (faster)     |
 | `&`    | H+,           | -       | Shift+7     | Combo (faster)     |
 | `-`    | -             | pos 14  | -           | Layer 2            |
-| `` ` ``| -             | pos 13  | pos 15      | Layer 2            |
+| `` ` ``| -             | -       | pos 15      | Layer 3            |
 | `\`    | -             | pos 17  | pos 17      | Layer 2            |
 | `( )`  | -             | pos 18-19 | Shift+9-0 | Layer 2            |
 | `[ ]`  | -             | pos 20-21 | -         | Layer 2            |
@@ -324,15 +323,15 @@ Quick reference for finding any symbol across layers and combos.
 | `< >`  | -             | pos 32-33 | -         | Layer 2            |
 | `"`    | -             | pos 29  | pos 13      | Layer 2/3          |
 | `'`    | -             | -       | pos 14      | Layer 3            |
-| `~`    | -             | pos 25  | Shift+`     | Layer 2            |
+| `~`    | -             | -       | pos 0       | Layer 3            |
 | `+`    | -             | pos 28  | -           | Layer 2            |
 | `?`    | -             | pos 34  | -           | Layer 2            |
 | `;`    | -             | pos 23  | -           | Layer 2            |
 | `@`    | -             | -       | Shift+2     | Layer 3 only       |
 | `#`    | -             | -       | Shift+3     | Layer 3 only       |
 | `*`    | -             | -       | Shift+8     | Layer 3 only       |
-| `!`    | -             | -       | Shift+1     | Layer 3 only       |
-| `%`    | -             | -       | Shift+5     | Layer 3 only       |
+| `!`    | -             | pos 25  | Shift+1     | Layer 2            |
+| `%`    | -             | pos 13  | Shift+5     | Layer 2            |
 | `^`    | -             | -       | Shift+6     | Layer 3 only       |
 
 ---
