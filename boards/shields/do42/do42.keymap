@@ -29,9 +29,9 @@
  * Layers:
  *   0 = Colemak (default, with home row mods)
  *   1 = QWERTY  (gaming, no home row mods, no combos)
- *   2 = Lower   (numbers, programming symbols, window management)
- *   3 = Upper   (shifted symbols, string delimiters, F-keys, navigation)
- *   4 = Function (F-keys, mouse buttons)
+ *   2 = Lower   (numbers, non-shifted symbols)
+ *   3 = Upper   (shifted symbols, navigation, arrows)
+ *   4 = Function (F-keys, mouse buttons, media)
  *   5 = Config   (bluetooth, base layer switching, power)
  */
 
@@ -58,10 +58,40 @@
         };
     };
 
+/* ── Macros (multi-character operators) ─────────────────────────────── */
+
+    macros {
+        arrow_op: arrow_op {                // -> (Golang, Rust, C)
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings = <&kp MINUS &kp GT>;
+        };
+
+        walrus_op: walrus_op {              // := (Golang short declaration)
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings = <&kp COLON &kp EQUAL>;
+        };
+
+        dbl_colon: dbl_colon {              // :: (Rust, C++)
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings = <&kp COLON &kp COLON>;
+        };
+    };
+
 /* ── Combos (Colemak only, disabled on QWERTY for gaming) ───────────── */
 
     combos {
         compatible = "zmk,combos";
+
+        /* ── Navigation Combos ──────────────────────────────────────── */
 
         combo_esc {                         // Q + W = Escape
             timeout-ms = <45>;
@@ -102,7 +132,9 @@
             bindings = <&caps_word>;
         };
 
-        combo_colon {                       // S + T = : (Colemak) - Vim command mode
+        /* ── High-Frequency Symbol Combos ───────────────────────────── */
+
+        combo_colon {                       // S + T = : (Vim command mode)
             timeout-ms = <45>;
             require-prior-idle-ms = <150>;
             key-positions = <15 16>;
@@ -110,7 +142,7 @@
             bindings = <&kp COLON>;
         };
 
-        combo_slash {                       // T + G = / (Colemak) - Search, paths, division
+        combo_slash {                       // T + G = / (Vim search, paths, division)
             timeout-ms = <45>;
             require-prior-idle-ms = <150>;
             key-positions = <16 17>;
@@ -118,7 +150,7 @@
             bindings = <&kp FSLH>;
         };
 
-        combo_underscore {                  // N + E = _ (Colemak) - snake_case variables
+        combo_underscore {                  // N + E = _ (snake_case variables)
             timeout-ms = <45>;
             require-prior-idle-ms = <150>;
             key-positions = <19 20>;
@@ -126,7 +158,7 @@
             bindings = <&kp UNDER>;
         };
 
-        combo_equals {                      // E + I = = (Colemak) - Assignments, comparisons
+        combo_equals {                      // E + I = = (assignments, comparisons)
             timeout-ms = <45>;
             require-prior-idle-ms = <150>;
             key-positions = <20 21>;
@@ -134,12 +166,56 @@
             bindings = <&kp EQUAL>;
         };
 
-        combo_pipe {                        // D + V = | (Colemak) - Unix pipes, logical OR
+        combo_pipe {                        // D + V = | (Unix pipes, logical OR)
             timeout-ms = <45>;
             require-prior-idle-ms = <150>;
             key-positions = <28 29>;
             layers = <0>;
             bindings = <&kp PIPE>;
+        };
+
+        /* ── Multi-Character Operator Combos ────────────────────────── */
+
+        combo_arrow {                       // I + O = -> (Golang, Rust, C)
+            timeout-ms = <45>;
+            require-prior-idle-ms = <150>;
+            key-positions = <21 22>;
+            layers = <0>;
+            bindings = <&arrow_op>;
+        };
+
+        combo_dbl_colon {                   // O + ' = :: (Rust, C++)
+            timeout-ms = <45>;
+            require-prior-idle-ms = <150>;
+            key-positions = <22 23>;
+            layers = <0>;
+            bindings = <&dbl_colon>;
+        };
+
+        combo_walrus {                      // S + T + G = := (Golang short declaration)
+            timeout-ms = <50>;
+            require-prior-idle-ms = <150>;
+            key-positions = <15 16 17>;
+            layers = <0>;
+            bindings = <&walrus_op>;
+        };
+
+        /* ── Special Symbol Combos ──────────────────────────────────── */
+
+        combo_dollar {                      // A + R = $ (shell, Terraform, regex)
+            timeout-ms = <45>;
+            require-prior-idle-ms = <150>;
+            key-positions = <13 14>;
+            layers = <0>;
+            bindings = <&kp DLLR>;
+        };
+
+        combo_ampersand {                   // H + , = & (Golang address-of, bitwise)
+            timeout-ms = <45>;
+            require-prior-idle-ms = <150>;
+            key-positions = <31 32>;
+            layers = <0>;
+            bindings = <&kp AMPS>;
         };
 
     };
@@ -156,9 +232,9 @@
     &kp ESC   &kp Q          &kp W          &kp F           &kp P           &kp B          &kp J     &kp L           &kp U           &kp Y          &kp SEMI       &kp BSPC
     &kp TAB   &hm LGUI A     &hm LALT R     &hm LCTRL S     &hm LSHFT T     &kp G          &kp M     &hm RSHFT N     &hm RCTRL E     &hm LALT I     &hm RGUI O     &kp SQT
     &kp LSHFT &kp Z          &kp X          &kp C           &kp D           &kp V          &kp K     &kp H           &kp COMMA       &kp DOT        &kp FSLH       &kp RET
-    &kp LCTRL &kp LGUI                                      &kp SPACE       &mo 2          &mo 3     &lt 4 RET                                      &kp LALT       &kp SLCK
+    &kp LCTRL &kp LGUI                                      &kp SPACE       &mo 2          &mo 3     &lt 4 RET                                      &kp RALT       &kp SLCK
 // └─────────┴──────────────┘                               └───────────────┴─────────┘    └─────────┴───────────────┘                               └──────────────┴─────────┘
-                                            &kp HOME    &kp K_SCROLL_DOWN   &kp K_MUTE     &kp K_SCROLL_UP    &kp END
+                                            &kp LEFT    &kp DOWN            &none          &kp UP             &kp RIGHT
             >;
         };
 
@@ -175,42 +251,42 @@
             >;
         };
 
-        /* Layer 2: Lower (numbers, symbols, window management) ─────  */
+        /* Layer 2: Lower (numbers, non-shifted symbols) ────────────  */
         lower_layer {
             bindings = <
 // ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐    ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐
     &kp ESC   &kp N1    &kp N2    &kp N3    &kp N4    &kp N5         &kp N6    &kp N7    &kp N8    &kp N9    &kp N0    &kp BSPC
-    &kp TAB   &kp MINUS &kp ASTRK &kp EQUAL &kp UNDER &kp PIPE       &kp LPAR  &kp RPAR  &kp LBKT  &kp RBKT  &kp COLON &kp SEMI
-    &kp LSHFT &kp AMPS  &kp FSLH  &kp BSLH  &kp PLUS  &kp TILDE      &kp LBRC  &kp RBRC  &kp LT    &kp GT    &kp QMARK &kp DEL
+    &kp TAB   &kp GRAVE &kp MINUS &kp EQUAL &kp FSLH  &kp BSLH       &kp LPAR  &kp RPAR  &kp LBKT  &kp RBKT  &kp COLON &kp SEMI
+    &kp LSHFT &kp TILDE &kp UNDER &kp PIPE  &kp PLUS  &kp DQT        &kp LBRC  &kp RBRC  &kp LT    &kp GT    &kp QMARK &kp DEL
     &kp LGUI  &kp LALT                      &kp SPACE &trans         &mo 5     &kp SPACE                     &kp RALT  &kp LCTRL
 // └─────────┴─────────┘                    └─────────┴─────────┘    └─────────┴─────────┘                    └─────────┴─────────┘
                                             &kp LEFT  &kp DOWN       &none     &kp UP    &kp RIGHT
             >;
         };
 
-        /* Layer 3: Upper (shifted symbols, navigation, F-keys) ─────  */
+        /* Layer 3: Upper (shifted symbols, navigation, arrows) ─────  */
         upper_layer {
             bindings = <
 // ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐    ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐
     &kp TILDE &kp EXCL  &kp AT    &kp HASH  &kp DLLR  &kp PRCNT      &kp CARET &kp AMPS  &kp ASTRK &kp LPAR  &kp RPAR  &kp DEL
-    &kp TAB   &kp DQT   &kp SQT   &kp GRAVE &kp PIPE  &kp BSLH       &kp HOME  &kp PGDN  &kp PGUP  &kp END   &kp COLON &none
-    &kp LSHFT &kp F1    &kp F2    &kp F3    &kp F4    &kp F5         &kp F6    &kp F7    &kp F8    &kp F9    &kp F10   &kp RET
-    &kp LGUI  &kp LALT                      &kp SPACE &mo 5          &trans    &kp F11                       &kp F12   &kp LCTRL
+    &kp TAB   &kp DQT   &kp SQT   &kp GRAVE &kp PIPE  &kp BSLH       &kp LEFT  &kp DOWN  &kp UP    &kp RIGHT &kp COLON &none
+    &kp LSHFT &none     &none     &none     &none     &none          &none     &kp PGDN  &kp PGUP  &kp HOME  &kp END   &kp RET
+    &kp LGUI  &kp LALT                      &kp SPACE &mo 5          &trans    &kp SPACE                     &kp RALT  &kp LCTRL
 // └─────────┴─────────┘                    └─────────┴─────────┘    └─────────┴─────────┘                    └─────────┴─────────┘
                                             &none     &kp C_BRI_DN   &none     &kp C_BRI_UP &none
             >;
         };
 
-        /* Layer 4: Function (F-keys, mouse buttons) ────────────────  */
+        /* Layer 4: Function (F-keys, mouse buttons, media) ─────────  */
         func_layer {
             bindings = <
 // ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐    ┌──────────┬──────────┬──────────┬──────────┬──────────┬─────────┐
     &kp ESC   &kp F1    &kp F2    &kp F3    &kp F4    &kp F5         &kp F6     &kp F7     &kp F8     &kp F9     &kp F10    &kp DEL
     &kp TAB   &kp F11   &kp F12   &none     &none     &none          &mkp MB4   &mkp MB1   &mkp MB3   &mkp MB2   &mkp MB5   &none
     &kp LSHFT &none     &none     &none     &none     &none          &none      &none      &none      &none      &none      &none
-    &kp LCTRL &kp LGUI                      &none     &none          &none      &none                                       &kp LALT  &kp SLCK
+    &kp LCTRL &kp LGUI                      &none     &none          &none      &none                                       &kp RALT  &kp SLCK
 // └─────────┴─────────┘                    └─────────┴─────────┘    └──────────┴──────────┘                                └─────────┴─────────┘
-                                            &none     &none          &none      &none      &none
+                                            &kp HOME  &kp K_SCROLL_DOWN &none  &kp K_SCROLL_UP &kp END
             >;
         };
 

@@ -1,7 +1,7 @@
 # do42 Keyboard Layout Reference
 
 A 42-key split keyboard with 5-button d-pad (49 keys total), running ZMK firmware.
-Optimized for **Neovim**, **programming** (Python, Rust, C, JavaScript), and
+Optimized for **Neovim**, **programming** (Python, Golang, Terraform, Markdown), and
 **tiling window managers** (Aerospace on macOS, Hyprland on Linux).
 
 ## Physical Layout
@@ -28,16 +28,30 @@ LEFT HALF                                   RIGHT HALF
 
 ---
 
+## Design Philosophy
+
+- **Cross-layer coherence:** Layer 2 carries only non-shifted symbols; shifted
+  symbols (`! @ # $ % ^ & * ( )`) live on Layer 3's number row.
+  No symbol appears on both layers unless it serves a different ergonomic role.
+- **Hand balance:** Symbol placement follows Colemak's ~47/53 L/R split,
+  distributing load evenly between hands.
+- **Navigation intent:** Layer 3 is the movement layer. Vim-style arrow keys
+  sit on the home row; page/document navigation lives directly below them.
+- **Combo-first for top symbols:** The 10 highest-frequency programming
+  symbols are accessible via combos on Layer 0 without any layer hold.
+
+---
+
 ## Layer Overview
 
-| Layer | Name     | Access                        | Purpose                                        |
-|-------|----------|-------------------------------|-------------------------------------------------|
-| 0     | Colemak  | Default                       | Typing with home row mods                      |
-| 1     | QWERTY   | Config layer toggle (`&to 1`) | Gaming (no home row mods, no combos)           |
-| 2     | Lower    | Hold `mo 2` (pos 39)         | Numbers, programming symbols, window mgmt      |
-| 3     | Upper    | Hold `mo 3` (pos 40)         | Shifted symbols, navigation, F-keys            |
-| 4     | Function | Hold `lt 4 RET` (pos 41)     | F-keys, mouse buttons                          |
-| 5     | Config   | Hold Lower + Upper together   | Bluetooth, base layer switching, power, reset  |
+| Layer | Name     | Access                        | Purpose                                       |
+|-------|----------|-------------------------------|------------------------------------------------|
+| 0     | Colemak  | Default                       | Typing with home row mods                     |
+| 1     | QWERTY   | Config layer toggle (`&to 1`) | Gaming (no home row mods, no combos)          |
+| 2     | Lower    | Hold `mo 2` (pos 39)         | Numbers, non-shifted programming symbols      |
+| 3     | Upper    | Hold `mo 3` (pos 40)         | Shifted symbols, navigation, arrows           |
+| 4     | Function | Hold `lt 4 RET` (pos 41)     | F-keys, mouse buttons, media                  |
+| 5     | Config   | Hold Lower + Upper together   | Bluetooth, base layer switching, power, reset |
 
 ---
 
@@ -53,12 +67,12 @@ Base typing layer with home row mods (balanced flavor).
 ├───────┼───────┼───────┼───────┼───────┼───────┤    ├───────┼───────┼───────┼───────┼───────┼───────┤
 │ LSHFT │   Z   │   X   │   C   │   D   │   V   │    │   K   │   H   │   ,   │   .   │   /   │  RET  │
 ├───────┼───────┼───────┴───────┼───────┼───────┤    ├───────┼───────┼───────┴───────┼───────┼───────┤
-│ LCTRL │ LGUI  │               │ SPACE │  mo2  │    │  mo3  │lt4/RET│               │ LALT  │ SLCK  │
+│ LCTRL │ LGUI  │               │ SPACE │  mo2  │    │  mo3  │lt4/RET│               │ RALT  │ SLCK  │
 └───────┴───────┘               └───────┴───────┘    └───────┴───────┘               └───────┴───────┘
-                      D-PAD: Home / ScrollDn / Mute / ScrollUp / End
+                      D-PAD: Left / Down / (none) / Up / Right
 ```
 
-### Home Row Mods
+### Home Row Mods (Mirrored)
 
 | Position | Tap | Hold   | Hand  |
 |----------|-----|--------|-------|
@@ -94,18 +108,21 @@ Standard QWERTY without home row mods or combos. Switched to via Config layer.
 
 ---
 
-## Layer 2: Lower (Numbers + Symbols + Window Management)
+## Layer 2: Lower (Numbers + Non-Shifted Symbols)
 
 Accessed by holding `mo 2` (position 39). Numbers on the top row enable
 `Super+Number` workspace switching in Aerospace/Hyprland.
+
+Symbols on this layer are those **not** available on Layer 3's shifted number
+row. No cross-layer duplication.
 
 ```
 ┌───────┬───────┬───────┬───────┬───────┬───────┐    ┌───────┬───────┬───────┬───────┬───────┬───────┐
 │  ESC  │   1   │   2   │   3   │   4   │   5   │    │   6   │   7   │   8   │   9   │   0   │ BSPC  │
 ├───────┼───────┼───────┼───────┼───────┼───────┤    ├───────┼───────┼───────┼───────┼───────┼───────┤
-│  TAB  │   -   │   *   │   =   │   _   │   |   │    │   (   │   )   │   [   │   ]   │   :   │   ;   │
+│  TAB  │   `   │   -   │   =   │   /   │   \   │    │   (   │   )   │   [   │   ]   │   :   │   ;   │
 ├───────┼───────┼───────┼───────┼───────┼───────┤    ├───────┼───────┼───────┼───────┼───────┼───────┤
-│ LSHFT │   &   │   /   │   \   │   +   │   ~   │    │   {   │   }   │   <   │   >   │   ?   │  DEL  │
+│ LSHFT │   ~   │   _   │   |   │   +   │   "   │    │   {   │   }   │   <   │   >   │   ?   │  DEL  │
 ├───────┼───────┼───────┴───────┼───────┼───────┤    ├───────┼───────┼───────┴───────┼───────┼───────┤
 │ LGUI  │ LALT  │               │ SPACE │ ▓▓▓▓▓ │    │  mo5  │ SPACE │               │ RALT  │ LCTRL │
 └───────┴───────┘               └───────┴───────┘    └───────┴───────┘               └───────┴───────┘
@@ -114,42 +131,72 @@ Accessed by holding `mo 2` (position 39). Numbers on the top row enable
 
 ### Symbol Placement Rationale
 
-- **Home row:** Highest-frequency programming symbols (`- * = _ | ( ) [ ] : ;`)
-- **Bottom row:** Operators and enclosures (`& / \ + ~ { } < > ?`)
-- **Brackets paired:** `()` adjacent, `[]` adjacent, `{}` adjacent, `<>` adjacent
-- **D-pad arrows:** Enable `Super+Arrow` window navigation in tiling WMs
+**Home row left** (strongest → weakest finger):
+- `/` (index) - Division, paths, Vim search
+- `=` (middle) - Assignment, comparison — highest frequency operator
+- `-` (ring) - Subtraction, lists, kebab-case
+- `` ` `` (pinky) - Backtick: Markdown code, Golang raw strings, shell
+
+**Home row right** (strongest → weakest finger):
+- `( )` (index pair) - Function calls, tuples, precedence
+- `[ ]` (middle/ring) - Arrays, indexing, slices
+- `:` (pinky) - Dicts, type hints, Vim commands
+- `;` (outer pinky) - Statement terminator
+
+**Bottom row left:**
+- `+` (index) - Addition
+- `|` (middle) - Unix pipes, logical OR
+- `_` (ring) - snake_case, Markdown italics
+- `~` (pinky) - Home directory, bitwise NOT
+
+**Bottom row right:**
+- `{ }` (index pair) - Code blocks, dicts, structs
+- `< >` (middle/ring) - Comparisons, generics, HTML
+- `?` (pinky) - Ternary, regex, optional
+
+**Bracket pairs** are always adjacent on the same hand for fast inward rolls.
 
 ---
 
-## Layer 3: Upper (Shifted Symbols + Navigation + F-Keys)
+## Layer 3: Upper (Shifted Symbols + Navigation + Arrows)
 
-Accessed by holding `mo 3` (position 40). Shifted number symbols on top row
-double as `Super+Shift+Number` for moving windows between workspaces.
+Accessed by holding `mo 3` (position 40). This is the **movement layer**.
+
+Shifted number symbols on the top row double as `Super+Shift+Number` for
+moving windows between workspaces.
 
 ```
 ┌───────┬───────┬───────┬───────┬───────┬───────┐    ┌───────┬───────┬───────┬───────┬───────┬───────┐
 │   ~   │   !   │   @   │   #   │   $   │   %   │    │   ^   │   &   │   *   │   (   │   )   │  DEL  │
 ├───────┼───────┼───────┼───────┼───────┼───────┤    ├───────┼───────┼───────┼───────┼───────┼───────┤
-│  TAB  │   "   │   '   │   `   │   |   │   \   │    │ HOME  │ PGDN  │ PGUP  │  END  │   :   │       │
+│  TAB  │   "   │   '   │   `   │   |   │   \   │    │  LEFT │ DOWN  │  UP   │ RIGHT │   :   │       │
 ├───────┼───────┼───────┼───────┼───────┼───────┤    ├───────┼───────┼───────┼───────┼───────┼───────┤
-│ LSHFT │  F1   │  F2   │  F3   │  F4   │  F5   │    │  F6   │  F7   │  F8   │  F9   │  F10  │  RET  │
+│ LSHFT │       │       │       │       │       │    │       │ PGDN  │ PGUP  │ HOME  │  END  │  RET  │
 ├───────┼───────┼───────┴───────┼───────┼───────┤    ├───────┼───────┼───────┴───────┼───────┼───────┤
-│ LGUI  │ LALT  │               │ SPACE │  mo5  │    │ ▓▓▓▓▓ │  F11  │               │  F12  │ LCTRL │
+│ LGUI  │ LALT  │               │ SPACE │  mo5  │    │ ▓▓▓▓▓ │ SPACE │               │ RALT  │ LCTRL │
 └───────┴───────┘               └───────┴───────┘    └───────┴───────┘               └───────┴───────┘
                       D-PAD: (none) / BRI_DN / (none) / BRI_UP / (none)
 ```
 
 ### Navigation Cluster
 
-Home row right side provides Vim-friendly navigation: `HOME PGDN PGUP END`
+Arrow keys on home row right (Vim-style HJKL positions):
+
+```
+HOME ROW:           LEFT   DOWN   UP     RIGHT
+BOTTOM ROW:                PGDN   PGUP   HOME   END
+```
+
+Page navigation sits **directly below** the arrow keys for logical spatial
+grouping: DOWN→PGDN, UP→PGUP, with HOME/END to the right.
 
 ### String Delimiters
 
-Home row left side groups all quote types: `" ' `` (double, single, backtick)
+Home row left side groups all quote types: `"` `'` `` ` `` (double, single, backtick)
 
 ---
 
-## Layer 4: Function (F-Keys + Mouse)
+## Layer 4: Function (F-Keys + Mouse + Media)
 
 Accessed by holding `lt 4 RET` (position 41). Tap for Enter, hold for layer.
 
@@ -161,9 +208,9 @@ Accessed by holding `lt 4 RET` (position 41). Tap for Enter, hold for layer.
 ├───────┼───────┼───────┼───────┼───────┼───────┤    ├───────┼───────┼───────┼───────┼───────┼───────┤
 │ LSHFT │       │       │       │       │       │    │       │       │       │       │       │       │
 ├───────┼───────┼───────┴───────┼───────┼───────┤    ├───────┼───────┼───────┴───────┼───────┼───────┤
-│ LCTRL │ LGUI  │               │       │       │    │       │ ▓▓▓▓▓ │               │ LALT  │ SLCK  │
+│ LCTRL │ LGUI  │               │       │       │    │       │ ▓▓▓▓▓ │               │ RALT  │ SLCK  │
 └───────┴───────┘               └───────┴───────┘    └───────┴───────┘               └───────┴───────┘
-                      D-PAD: (none) / (none) / (none) / (none) / (none)
+                      D-PAD: Home / ScrollDn / (none) / ScrollUp / End
 ```
 
 ### Mouse Buttons
@@ -213,20 +260,80 @@ Accessed by holding **both** `mo 2` and `mo 3` simultaneously (tri-layer).
 ## Combos (Layer 0 Only)
 
 All combos are Colemak-only (disabled on QWERTY gaming layer).
-Timeout: 45ms. Require prior idle: 150ms.
+Default timeout: 45ms. Require prior idle: 150ms.
 
-| Combo           | Keys (Colemak) | Positions | Output   | Use Case                       |
-|-----------------|----------------|-----------|----------|--------------------------------|
-| Escape          | Q + W          | 1 + 2     | `ESC`    | Vim normal mode                |
-| Tab             | W + F          | 2 + 3     | `TAB`    | Indentation, completion        |
-| Delete          | L + U          | 7 + 8     | `DEL`    | Forward delete                 |
-| Backspace       | Y + ;          | 9 + 10    | `BSPC`   | Delete backward                |
-| Caps Word       | Space + lt4    | 38 + 41   | CapsWord | SCREAMING_SNAKE_CASE (50ms)    |
-| Colon           | S + T          | 15 + 16   | `:`      | Vim command mode               |
-| Slash           | T + G          | 16 + 17   | `/`      | Vim search, paths, division    |
-| Underscore      | N + E          | 19 + 20   | `_`      | snake_case variables           |
-| Equals          | E + I          | 20 + 21   | `=`      | Assignments, comparisons       |
-| Pipe            | D + V          | 28 + 29   | `\|`     | Unix pipes, logical OR         |
+### Navigation Combos
+
+| Combo     | Keys (Colemak) | Positions | Output   | Use Case                    |
+|-----------|----------------|-----------|----------|-----------------------------|
+| Escape    | Q + W          | 1 + 2     | `ESC`    | Vim normal mode             |
+| Tab       | W + F          | 2 + 3     | `TAB`    | Indentation, completion     |
+| Delete    | L + U          | 7 + 8     | `DEL`    | Forward delete              |
+| Backspace | Y + ;          | 9 + 10    | `BSPC`   | Delete backward             |
+| Caps Word | Space + lt4    | 38 + 41   | CapsWord | SCREAMING_SNAKE_CASE (50ms) |
+
+### High-Frequency Symbol Combos
+
+| Combo      | Keys (Colemak) | Positions | Output | Use Case                         |
+|------------|----------------|-----------|--------|----------------------------------|
+| Colon      | S + T          | 15 + 16   | `:`    | Vim command mode                 |
+| Slash      | T + G          | 16 + 17   | `/`    | Vim search, paths, division      |
+| Underscore | N + E          | 19 + 20   | `_`    | snake_case variables             |
+| Equals     | E + I          | 20 + 21   | `=`    | Assignments, comparisons         |
+| Pipe       | D + V          | 28 + 29   | `\|`   | Unix pipes, logical OR           |
+
+### Multi-Character Operator Combos
+
+| Combo        | Keys (Colemak) | Positions   | Output | Use Case                      |
+|--------------|----------------|-------------|--------|-------------------------------|
+| Arrow        | I + O          | 21 + 22     | `->`   | Golang, Rust, C pointers      |
+| Double Colon | O + '          | 22 + 23     | `::`   | Rust paths, C++ namespaces    |
+| Walrus       | S + T + G      | 15 + 16 + 17 | `:=` | Golang short declaration (50ms) |
+
+### Special Symbol Combos
+
+| Combo     | Keys (Colemak) | Positions | Output | Use Case                          |
+|-----------|----------------|-----------|--------|-----------------------------------|
+| Dollar    | A + R          | 13 + 14   | `$`    | Shell vars, Terraform, regex      |
+| Ampersand | H + ,          | 31 + 32   | `&`    | Golang address-of, bitwise AND    |
+
+---
+
+## Symbol Access Matrix
+
+Quick reference for finding any symbol across layers and combos.
+
+| Symbol | Combo         | Layer 2 | Layer 3     | Best Access        |
+|--------|---------------|---------|-------------|--------------------|
+| `:`    | S+T           | pos 22  | pos 22      | Combo (instant)    |
+| `_`    | N+E           | pos 26  | -           | Combo (instant)    |
+| `=`    | E+I           | pos 15  | -           | Combo (instant)    |
+| `/`    | T+G           | pos 16  | -           | Combo (instant)    |
+| `\|`   | D+V           | pos 27  | pos 16      | Combo (instant)    |
+| `->`   | I+O           | -       | -           | Combo only         |
+| `::`   | O+'           | -       | -           | Combo only         |
+| `:=`   | S+T+G         | -       | -           | Combo only         |
+| `$`    | A+R           | -       | Shift+4     | Combo (faster)     |
+| `&`    | H+,           | -       | Shift+7     | Combo (faster)     |
+| `-`    | -             | pos 14  | -           | Layer 2            |
+| `` ` ``| -             | pos 13  | pos 15      | Layer 2            |
+| `\`    | -             | pos 17  | pos 17      | Layer 2            |
+| `( )`  | -             | pos 18-19 | Shift+9-0 | Layer 2            |
+| `[ ]`  | -             | pos 20-21 | -         | Layer 2            |
+| `{ }`  | -             | pos 30-31 | -         | Layer 2            |
+| `< >`  | -             | pos 32-33 | -         | Layer 2            |
+| `"`    | -             | pos 29  | pos 13      | Layer 2/3          |
+| `'`    | -             | -       | pos 14      | Layer 3            |
+| `~`    | -             | pos 25  | Shift+`     | Layer 2            |
+| `+`    | -             | pos 28  | -           | Layer 2            |
+| `?`    | -             | pos 34  | -           | Layer 2            |
+| `;`    | -             | pos 23  | -           | Layer 2            |
+| `@`    | -             | -       | Shift+2     | Layer 3 only       |
+| `#`    | -             | -       | Shift+3     | Layer 3 only       |
+| `*`    | -             | -       | Shift+8     | Layer 3 only       |
+| `!`    | -             | -       | Shift+1     | Layer 3 only       |
+| `%`    | -             | -       | Shift+5     | Layer 3 only       |
+| `^`    | -             | -       | Shift+6     | Layer 3 only       |
 
 ---
 
@@ -251,11 +358,14 @@ Layer 3 top row has shifted number symbols (`! @ # $ %` etc.), which are
 
 ### Window Navigation (Super + Arrow)
 
-Layer 2 d-pad provides arrow keys. Combined with LGUI:
-
+**Option A: D-pad (base layer, no layer hold):**
 1. Hold `A` to activate LGUI
-2. Hold `mo 2` to activate Lower layer
-3. Use d-pad arrows for Super+Left/Down/Up/Right
+2. Use d-pad arrows directly on Layer 0
+
+**Option B: Vim-style (Layer 3 home row):**
+1. Hold `A` to activate LGUI
+2. Hold `mo 3` to activate Upper layer
+3. Use arrow cluster at HJKL positions (LEFT/DOWN/UP/RIGHT)
 
 ---
 
@@ -268,9 +378,10 @@ Layer 2 d-pad provides arrow keys. Combined with LGUI:
 | Home row mods   | require-prior-idle-ms  | 150ms  |
 | Layer-tap (`lt`) | tapping-term-ms       | 140ms  |
 | Layer-tap (`lt`) | require-prior-idle-ms | 150ms  |
-| Combos          | timeout-ms             | 45ms   |
+| Combos (2-key)  | timeout-ms             | 45ms   |
+| Combos (3-key)  | timeout-ms             | 50ms   |
 | Combos          | require-prior-idle-ms  | 150ms  |
-| Caps Word combo | timeout-ms             | 50ms   |
+| Macros          | wait-ms / tap-ms       | 10ms   |
 
 ---
 
