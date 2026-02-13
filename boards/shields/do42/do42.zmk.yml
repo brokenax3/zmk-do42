@@ -6,7 +6,6 @@ url: https://github.com/brokenax3/zmk-do42/
 requires: [pro_micro]
 features:
   - keys
-  - studio
 siblings:
   - do42_left
   - do42_right
