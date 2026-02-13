@@ -30,15 +30,18 @@ LEFT HALF                                   RIGHT HALF
 
 ## Design Philosophy
 
-- **Cross-layer coherence:** Layer 2 carries only non-shifted symbols; shifted
-  symbols (`! @ # $ % ^ & * ( )`) live on Layer 3's number row.
-  No symbol appears on both layers unless it serves a different ergonomic role.
+- **Cross-layer coherence:** Layer 2 carries non-shifted symbols and operators;
+  shifted symbols (`! @ # $ % ^ & * ( )`) live on Layer 3's number row.
+  `!` and `%` are intentionally duplicated on Layer 2 (pinky positions) for
+  faster access without reaching Layer 3's top row.
 - **Hand balance:** Symbol placement follows Colemak's ~47/53 L/R split,
   distributing load evenly between hands.
 - **Navigation intent:** Layer 3 is the movement layer. Vim-style arrow keys
-  sit on the home row; page/document navigation lives directly below them.
-- **Combo-first for top symbols:** The 10 highest-frequency programming
-  symbols are accessible via combos on Layer 0 without any layer hold.
+  sit on the home row; page/document navigation lives directly below them
+  in matching directional correspondence (LEFT→HOME, DOWN→PGDN, UP→PGUP,
+  RIGHT→END).
+- **Combo-first for top symbols:** The highest-frequency programming symbols
+  are accessible via combos on Layer 0 without any layer hold.
 
 ---
 
@@ -113,8 +116,8 @@ Standard QWERTY without home row mods or combos. Switched to via Config layer.
 Accessed by holding `mo 2` (position 39). Numbers on the top row enable
 `Super+Number` workspace switching in Aerospace/Hyprland.
 
-Symbols on this layer are those **not** available on Layer 3's shifted number
-row. No cross-layer duplication.
+Symbols on this layer are primarily those **not** available on Layer 3's shifted
+number row. `!` and `%` are duplicated from Layer 3 for ergonomic access.
 
 ```
 ┌───────┬───────┬───────┬───────┬───────┬───────┐    ┌───────┬───────┬───────┬───────┬───────┬───────┐
@@ -171,7 +174,7 @@ moving windows between workspaces.
 ├───────┼───────┼───────┼───────┼───────┼───────┤    ├───────┼───────┼───────┼───────┼───────┼───────┤
 │  TAB  │   "   │   '   │   `   │   |   │   \   │    │  LEFT │ DOWN  │  UP   │ RIGHT │   :   │       │
 ├───────┼───────┼───────┼───────┼───────┼───────┤    ├───────┼───────┼───────┼───────┼───────┼───────┤
-│ LSHFT │       │       │       │       │       │    │       │ HOME  │ PGDN  │ PGUP  │  END  │  RET  │
+│ LSHFT │       │       │       │       │       │    │ HOME  │ PGDN  │ PGUP  │  END  │       │  RET  │
 ├───────┼───────┼───────┴───────┼───────┼───────┤    ├───────┼───────┼───────┴───────┼───────┼───────┤
 │ LGUI  │ LALT  │               │ SPACE │  mo5  │    │ ▓▓▓▓▓ │ SPACE │               │ RALT  │ LCTRL │
 └───────┴───────┘               └───────┴───────┘    └───────┴───────┘               └───────┴───────┘
@@ -183,8 +186,8 @@ moving windows between workspaces.
 Arrow keys on home row right (Vim-style HJKL positions):
 
 ```
-HOME ROW:           LEFT   DOWN   UP     RIGHT
-BOTTOM ROW:         HOME   PGDN   PGUP   END
+HOME ROW:    LEFT   DOWN   UP     RIGHT  :
+BOTTOM ROW:  HOME   PGDN   PGUP   END
 ```
 
 Each navigation key sits **directly below** its directional counterpart:

@@ -263,7 +263,7 @@
 // ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐    ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐
     &kp TILDE &kp EXCL  &kp AT    &kp HASH  &kp DLLR  &kp PRCNT      &kp CARET &kp AMPS  &kp ASTRK &kp LPAR  &kp RPAR  &kp DEL
     &kp TAB   &kp DQT   &kp SQT   &kp GRAVE &kp PIPE  &kp BSLH       &kp LEFT  &kp DOWN  &kp UP    &kp RIGHT &kp COLON &none
-    &kp LSHFT &none     &none     &none     &none     &none          &none     &kp HOME  &kp PGDN  &kp PGUP  &kp END   &kp RET
+    &kp LSHFT &none     &none     &none     &none     &none          &kp HOME  &kp PGDN  &kp PGUP  &kp END   &none     &kp RET
     &kp LGUI  &kp LALT                      &kp SPACE &mo 5          &trans    &kp SPACE                     &kp RALT  &kp LCTRL
 // └─────────┴─────────┘                    └─────────┴─────────┘    └─────────┴─────────┘                    └─────────┴─────────┘
                                             &none     &kp C_BRI_DN   &none     &kp C_BRI_UP &none
