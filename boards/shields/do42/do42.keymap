@@ -61,303 +61,28 @@
 /* ── Macros (multi-character operators) ─────────────────────────────── */
 
     macros {
-        arrow_op: arrow_op {                // -> (Golang, Rust, C)
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <10>;
-            tap-ms = <10>;
-            bindings = <&kp MINUS &kp GT>;
-        };
-
-        walrus_op: walrus_op {              // := (Golang short declaration)
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <10>;
-            tap-ms = <10>;
-            bindings = <&kp COLON &kp EQUAL>;
-        };
-
-        dbl_colon: dbl_colon {              // :: (Rust, C++)
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <10>;
-            tap-ms = <10>;
-            bindings = <&kp COLON &kp COLON>;
-        };
-
         /* ── Tmux Macros (prefix: Ctrl+B) ──────────────────────────── */
-
-        /* Pane navigation */
-        tmux_left: tmux_left {              // Ctrl+B Left (navigate left pane)
+        tmux_macro: tmux_macro {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             wait-ms = <10>;
             tap-ms = <10>;
-            bindings = <&macro_press &kp LCTRL>
-                     , <&macro_tap &kp B>
-                     , <&macro_release &kp LCTRL>
-                     , <&macro_tap &kp LEFT>;
-        };
-
-        tmux_down: tmux_down {              // Ctrl+B Down (navigate down pane)
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <10>;
-            tap-ms = <10>;
-            bindings = <&macro_press &kp LCTRL>
-                     , <&macro_tap &kp B>
-                     , <&macro_release &kp LCTRL>
-                     , <&macro_tap &kp DOWN>;
-        };
-
-        tmux_up: tmux_up {                  // Ctrl+B Up (navigate up pane)
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <10>;
-            tap-ms = <10>;
-            bindings = <&macro_press &kp LCTRL>
-                     , <&macro_tap &kp B>
-                     , <&macro_release &kp LCTRL>
-                     , <&macro_tap &kp UP>;
-        };
-
-        tmux_right: tmux_right {            // Ctrl+B Right (navigate right pane)
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <10>;
-            tap-ms = <10>;
-            bindings = <&macro_press &kp LCTRL>
-                     , <&macro_tap &kp B>
-                     , <&macro_release &kp LCTRL>
-                     , <&macro_tap &kp RIGHT>;
-        };
-
-        /* Window management */
-        tmux_new_win: tmux_new_win {        // Ctrl+B C (create new window)
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <10>;
-            tap-ms = <10>;
-            bindings = <&macro_press &kp LCTRL>
-                     , <&macro_tap &kp B>
-                     , <&macro_release &kp LCTRL>
-                     , <&macro_tap &kp C>;
-        };
-
-        tmux_prev_win: tmux_prev_win {      // Ctrl+B P (previous window)
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <10>;
-            tap-ms = <10>;
-            bindings = <&macro_press &kp LCTRL>
-                     , <&macro_tap &kp B>
-                     , <&macro_release &kp LCTRL>
-                     , <&macro_tap &kp P>;
-        };
-
-        tmux_next_win: tmux_next_win {      // Ctrl+B N (next window)
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <10>;
-            tap-ms = <10>;
-            bindings = <&macro_press &kp LCTRL>
-                     , <&macro_tap &kp B>
-                     , <&macro_release &kp LCTRL>
-                     , <&macro_tap &kp N>;
-        };
-
-        /* Pane management */
-        tmux_split_h: tmux_split_h {        // Ctrl+B % (split pane horizontally)
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <10>;
-            tap-ms = <10>;
-            bindings = <&macro_press &kp LCTRL>
-                     , <&macro_tap &kp B>
-                     , <&macro_release &kp LCTRL>
-                     , <&macro_press &kp LSHFT>
-                     , <&macro_tap &kp N5>
-                     , <&macro_release &kp LSHFT>;
-        };
-
-        tmux_split_v: tmux_split_v {        // Ctrl+B " (split pane vertically)
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <10>;
-            tap-ms = <10>;
-            bindings = <&macro_press &kp LCTRL>
-                     , <&macro_tap &kp B>
-                     , <&macro_release &kp LCTRL>
-                     , <&macro_press &kp LSHFT>
-                     , <&macro_tap &kp SQT>
-                     , <&macro_release &kp LSHFT>;
-        };
-
-        tmux_zoom: tmux_zoom {              // Ctrl+B Z (toggle pane zoom)
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <10>;
-            tap-ms = <10>;
-            bindings = <&macro_press &kp LCTRL>
-                     , <&macro_tap &kp B>
-                     , <&macro_release &kp LCTRL>
-                     , <&macro_tap &kp Z>;
-        };
-
-        tmux_copy: tmux_copy {              // Ctrl+B [ (enter copy mode)
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <10>;
-            tap-ms = <10>;
-            bindings = <&macro_press &kp LCTRL>
-                     , <&macro_tap &kp B>
-                     , <&macro_release &kp LCTRL>
-                     , <&macro_tap &kp LBKT>;
-        };
-
-        tmux_kill: tmux_kill {              // Ctrl+B X (kill current pane)
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <10>;
-            tap-ms = <10>;
-            bindings = <&macro_press &kp LCTRL>
-                     , <&macro_tap &kp B>
-                     , <&macro_release &kp LCTRL>
-                     , <&macro_tap &kp X>;
+            bindings = <&kp LCTRL &kp B>;
         };
     };
 
 /* ── Combos (Colemak only, disabled on QWERTY for gaming) ───────────── */
-/*
- * Timing tiers (based on conflict risk with common words):
- *   Low:    timeout 40ms, idle 150ms  — cross-split or rare bigrams
- *   Medium: timeout 30ms, idle 175ms  — infrequent same-hand bigrams
- *   High:   timeout 25ms, idle 200ms  — common word conflicts
- */
-
     combos {
         compatible = "zmk,combos";
 
-        /* ── Navigation Combos (cross-split, low conflict) ──────────── */
-
-        combo_esc {                         // Q + L → ESC  ("Quit Left")
+        // E + S
+        combo_esc {
             timeout-ms = <40>;
             require-prior-idle-ms = <150>;
-            key-positions = <1 7>;
+            key-positions = <15 20>;
             layers = <0>;
             bindings = <&kp ESC>;
         };
-
-        combo_tab {                         // W + U → TAB  ("Window Up")
-            timeout-ms = <40>;
-            require-prior-idle-ms = <150>;
-            key-positions = <2 8>;
-            layers = <0>;
-            bindings = <&kp TAB>;
-        };
-
-        combo_bspc {                        // F + U → BSPC ("Fix Undo")
-            timeout-ms = <40>;
-            require-prior-idle-ms = <150>;
-            key-positions = <3 8>;
-            layers = <0>;
-            bindings = <&kp BSPC>;
-        };
-
-        combo_del {                         // P + Y → DEL  ("Purge Yes")
-            timeout-ms = <40>;
-            require-prior-idle-ms = <150>;
-            key-positions = <4 9>;
-            layers = <0>;
-            bindings = <&kp DEL>;
-        };
-
-        /* ── High-Frequency Symbol Combos ───────────────────────────── */
-
-        combo_underscore {                  // U + D → _    ("UnDerscore")
-            timeout-ms = <30>;
-            require-prior-idle-ms = <175>;
-            key-positions = <8 28>;
-            layers = <0>;
-            bindings = <&kp UNDER>;
-        };
-
-        combo_colon {                       // C + O → :    ("COlon")
-            timeout-ms = <25>;
-            require-prior-idle-ms = <200>;
-            key-positions = <27 22>;
-            layers = <0>;
-            bindings = <&kp COLON>;
-        };
-
-        combo_slash {                       // F + H → /    ("Forward/Hack")
-            timeout-ms = <40>;
-            require-prior-idle-ms = <150>;
-            key-positions = <3 31>;
-            layers = <0>;
-            bindings = <&kp FSLH>;
-        };
-
-        combo_equals {                      // E + Q → =    ("EQuals")
-            timeout-ms = <40>;
-            require-prior-idle-ms = <150>;
-            key-positions = <20 1>;
-            layers = <0>;
-            bindings = <&kp EQUAL>;
-        };
-
-        combo_pipe {                        // P + I → |    ("PIPe")
-            timeout-ms = <40>;
-            require-prior-idle-ms = <150>;
-            key-positions = <4 21>;
-            layers = <0>;
-            bindings = <&kp PIPE>;
-        };
-
-        /* ── Multi-Character Operator Combos ────────────────────────── */
-
-        combo_arrow {                       // A + W → ->   ("ArroW")
-            timeout-ms = <30>;
-            require-prior-idle-ms = <175>;
-            key-positions = <13 2>;
-            layers = <0>;
-            bindings = <&arrow_op>;
-        };
-
-        combo_dbl_colon {                   // C + N → ::   ("C++ Namespace")
-            timeout-ms = <40>;
-            require-prior-idle-ms = <150>;
-            key-positions = <27 19>;
-            layers = <0>;
-            bindings = <&dbl_colon>;
-        };
-
-        combo_walrus {                      // W + L → :=   ("WaLrus")
-            timeout-ms = <40>;
-            require-prior-idle-ms = <150>;
-            key-positions = <2 7>;
-            layers = <0>;
-            bindings = <&walrus_op>;
-        };
-
-        /* ── Special Symbol Combos ──────────────────────────────────── */
-
-        combo_dollar {                      // D + O → $    ("DOllar")
-            timeout-ms = <40>;
-            require-prior-idle-ms = <150>;
-            key-positions = <28 22>;
-            layers = <0>;
-            bindings = <&kp DLLR>;
-        };
-
-        combo_ampersand {                   // A + N → &    ("ANd")
-            timeout-ms = <40>;
-            require-prior-idle-ms = <150>;
-            key-positions = <13 19>;
-            layers = <0>;
-            bindings = <&kp AMPS>;
-        };
-
     };
 
 /* ── Keymap ─────────────────────────────────────────────────────────── */
@@ -368,12 +93,12 @@
         /* Layer 0: Colemak ─────────────────────────────────────────── */
         colemak {
             bindings = <
-// ┌─────────┬──────────────┬──────────────┬───────────────┬───────────────┬─────────┐    ┌─────────┬───────────────┬───────────────┬──────────────┬──────────────┬─────────┐
-    &kp ESC   &kp Q          &kp W          &kp F           &kp P           &kp B          &kp J     &kp L           &kp U           &kp Y          &kp SEMI       &kp BSPC
-    &kp TAB   &hm LGUI A     &hm LALT R     &hm LCTRL S     &hm LSHFT T     &kp G          &kp M     &hm RSHFT N     &hm RCTRL E     &hm LALT I     &hm RGUI O     &kp SQT
-    &kp LSHFT &kp Z          &kp X          &kp C           &kp D           &kp V          &kp K     &kp H           &kp COMMA       &kp DOT        &kp FSLH       &kp RET
-    &kp LCTRL &kp LGUI                                      &kp SPACE       &mo 2          &mo 3     &lt 4 RET                                      &kp RALT       &kp SLCK
-// └─────────┴──────────────┘                               └───────────────┴─────────┘    └─────────┴───────────────┘                               └──────────────┴─────────┘
+// ┌─────────┬───────────┬───────────┬────────────┬────────────┬──────┐    ┌──────┬────────────┬────────────┬───────────┬───────────┬─────────┐
+    &kp ESC   &kp Q       &kp W       &kp F        &kp P        &kp B       &kp J  &kp L        &kp U        &kp Y       &kp SEMI    &kp BSPC
+    &kp TAB   &hm LGUI A  &hm LALT R  &hm LCTRL S  &hm LSHFT T  &kp G       &kp M  &hm RSHFT N  &hm RCTRL E  &hm LALT I  &hm RGUI O  &kp SQT
+    &kp LSHFT &kp Z       &kp X       &kp C        &kp D        &kp V       &kp K  &kp H        &kp COMMA    &kp DOT     &kp FSLH    &kp RET
+    &kp LCTRL &kp LGUI                             &kp SPACE    &mo 2       &mo 3  &lt 4 RET                             &kp RALT    &kp SLCK
+// └─────────┴───────────┘                        └────────────┴──────┘    └──────┴────────────┘                        └───────────┴─────────┘
                                             &kp LEFT    &kp DOWN            &none          &kp UP             &kp RIGHT
             >;
         };
@@ -386,7 +111,7 @@
     &kp TAB   &kp A     &kp S     &kp D     &kp F     &kp G          &kp H     &kp J     &kp K     &kp L     &kp SEMI  &kp SQT
     &kp LSHFT &kp Z     &kp X     &kp C     &kp V     &kp B          &kp N     &kp M     &kp COMMA &kp DOT   &kp FSLH  &kp ESC
     &kp LCTRL &kp LGUI                      &kp SPACE &mo 2          &mo 3     &lt 4 RET                     &kp LALT  &kp SLCK
-// └─────────┴─────────┘                    └─────────┴─────────┘    └─────────┴─────────┘                    └─────────┴─────────┘
+// └─────────┴─────────┘                   └─────────┴─────────┘    └─────────┴─────────┘                   └─────────┴─────────┘
                                             &kp LEFT  &kp DOWN       &none     &kp UP    &kp RIGHT
             >;
         };
@@ -396,24 +121,24 @@
             bindings = <
 // ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐    ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐
     &kp ESC   &kp N1    &kp N2    &kp N3    &kp N4    &kp N5         &kp N6    &kp N7    &kp N8    &kp N9    &kp N0    &kp BSPC
-    &kp TAB   &kp PRCNT &kp MINUS &kp EQUAL &kp FSLH  &kp BSLH       &kp LEFT  &kp DOWN  &kp UP    &kp RIGHT &kp COLON &kp SQT
-    &kp LSHFT &kp EXCL  &kp UNDER &kp PIPE  &kp PLUS  &kp DQT        &kp HOME  &kp PGDN  &kp PGUP  &kp END   &none     &kp RET
+    &kp TAB   &none     &kp TILDE &kp UNDER &kp MINUS &kp PIPE       &kp LEFT  &kp DOWN  &kp UP    &kp RIGHT &kp COLON &kp SQT
+    &kp LSHFT &none     &kp GRAVE &kp EQUAL &kp PLUS  &kp DQT        &kp HOME  &kp PGDN  &kp PGUP  &kp END   &none     &kp RET
     &kp LGUI  &kp LALT                      &kp SPACE &trans         &mo 5     &kp SPACE                     &kp RALT  &kp LCTRL
-// └─────────┴─────────┘                    └─────────┴─────────┘    └─────────┴─────────┘                    └─────────┴─────────┘
-                                            &kp LEFT  &kp DOWN       &none     &kp UP    &kp RIGHT
+// └─────────┴─────────┘                    └─────────┴────────┘    └─────────┴─────────┘                   └──────────┴────────┘
+                                            &kp C_PREV  &kp C_VOL_DN     &kp C_PP     &kp C_VOL_UP    &kp C_NEXT
             >;
         };
 
         /* Layer 3: Upper (shifted symbols top; tmux left, brackets right) */
         upper_layer {
             bindings = <
-// ┌─────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────┐    ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐
-    &kp TILDE &kp EXCL       &kp AT        &kp HASH      &kp DLLR      &kp PRCNT          &kp CARET &kp AMPS  &kp ASTRK &kp LPAR  &kp RPAR  &kp DEL
-    &kp TAB   &tmux_new_win  &tmux_split_h &tmux_split_v &tmux_zoom    &tmux_kill         &kp LPAR  &kp RPAR  &kp LBKT  &kp RBKT  &kp COLON &kp SEMI
-    &kp LSHFT &tmux_left     &tmux_down    &tmux_up      &tmux_right   &tmux_copy         &kp LBRC  &kp RBRC  &kp LT    &kp GT    &kp QMARK &kp DEL
-    &kp LGUI  &kp LALT                                   &kp SPACE     &mo 5              &trans    &kp SPACE                     &kp RALT  &kp LCTRL
-// └─────────┴─────────────┘                             └─────────────┴─────────────┘    └─────────┴─────────┘                    └─────────┴─────────┘
-                                            &none     &kp C_BRI_DN   &none     &kp C_BRI_UP &none
+// ┌─────────┬─────────┬───────┬─────────┬─────────────┬──────────┐    ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐
+    &kp TILDE &kp EXCL  &kp AT  &kp HASH  &kp DLLR      &kp PRCNT       &kp CARET &kp AMPS  &kp ASTRK &kp LPAR  &kp RPAR  &kp DEL
+    &kp TAB   &none     &none   &none     &tmux_macro   &none           &none     &kp LPAR  &kp RPAR  &kp LBKT  &kp RBKT  &none
+    &kp LSHFT &none     &none   &kp BSLH  &kp FSLH      &none           &none     &kp LBRC  &kp RBRC  &kp LT    &kp GT    &none
+    &kp LGUI  &kp LALT                    &kp SPACE     &mo 5           &trans    &kp SPACE                     &kp RALT  &kp LCTRL
+// └─────────┴─────────┘                 └─────────────┴──────────┘    └─────────┴─────────┘                   └─────────┴─────────┘
+                                        &none     &kp C_BRI_DN   &none     &kp C_BRI_UP &none
             >;
         };
 
@@ -424,8 +149,8 @@
     &kp ESC   &kp F1    &kp F2    &kp F3    &kp F4    &kp F5         &kp F6     &kp F7     &kp F8     &kp F9     &kp F10    &kp DEL
     &kp TAB   &kp F11   &kp F12   &none     &none     &none          &mkp MB4   &mkp MB1   &mkp MB3   &mkp MB2   &mkp MB5   &none
     &kp LSHFT &none     &none     &none     &none     &none          &none      &none      &none      &none      &none      &none
-    &kp LCTRL &kp LGUI                      &none     &none          &none      &none                                       &kp RALT  &kp SLCK
-// └─────────┴─────────┘                    └─────────┴─────────┘    └──────────┴──────────┘                                └─────────┴─────────┘
+    &kp LCTRL &kp LGUI                      &none     &none          &none      &none                            &kp RALT  &kp SLCK
+// └─────────┴─────────┘                    └─────────┴─────────┘    └──────────┴──────────┘                    └──────────┴─────────┘
                                             &kp HOME  &kp K_SCROLL_DOWN &none  &kp K_SCROLL_UP &kp END
             >;
         };
@@ -433,12 +158,12 @@
         /* Layer 5: Config (bluetooth, base layer, power) ───────────  */
         config_layer {
             bindings = <
-// ┌────────────────────┬─────────┬─────────┬─────────────┬─────────────┬────────────────┐    ┌────────────────┬──────────────┬──────────────┬──────────────┬─────────────┬────────────────┐
-    &bootloader          &to 0     &to 1     &none         &none         &none                 &bt BT_SEL 0    &bt BT_SEL 1   &bt BT_SEL 2   &bt BT_SEL 3   &none         &sys_reset
-    &out OUT_TOG         &kp SLCK  &none     &none         &none         &none                 &none  &bt BT_PRV     &bt BT_NXT     &none          &none         &none
-    &none                &none     &none     &none         &none         &none                 &none           &none          &none          &none          &none         &none
-    &ext_power EP_OFF    &ext_power EP_ON              &none         &none                 &none           &none                                        &none           &bt BT_CLR
-// └────────────────────┴─────────┘                    └─────────────┴────────────────┘    └────────────────┴──────────────┘                              └─────────────┴────────────────┘
+// ┌──────────────────┬─────────────────┬──────┬──────┬──────┬──────┐    ┌───────────────┬─────────────┬─────────────┬─────────────┬──────┬───────────┐
+    &bootloader        &to 0             &to 1  &none  &none  &none       &bt BT_SEL 0    &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &none  &sys_reset
+    &out OUT_TOG       &kp SLCK          &none  &none  &none  &none       &none           &bt BT_PRV    &bt BT_NXT    &none         &none  &none
+    &none              &none             &none  &none  &none  &none       &none           &none         &none         &none         &none  &none
+    &ext_power EP_OFF  &ext_power EP_ON                &none  &none       &none           &none                                     &none  &bt BT_CLR
+// └──────────────────┴─────────────────┘             └──────┴──────┘    └───────────────┴─────────────┘                           └──────┴───────────┘
                                             &none     &none          &none      &none      &none
             >;
         };
