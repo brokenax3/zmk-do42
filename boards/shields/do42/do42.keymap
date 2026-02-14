@@ -29,8 +29,8 @@
  * Layers:
  *   0 = Colemak (default, with home row mods)
  *   1 = QWERTY  (gaming, no home row mods, no combos)
- *   2 = Lower   (numbers, non-shifted symbols)
- *   3 = Upper   (shifted symbols, navigation, arrows)
+ *   2 = Lower   (numbers + symbols left, navigation right)
+ *   3 = Upper   (shifted symbols top, tmux left, brackets right)
  *   4 = Function (F-keys, mouse buttons, media)
  *   5 = Config   (bluetooth, base layer switching, power)
  */
@@ -84,129 +84,276 @@
             tap-ms = <10>;
             bindings = <&kp COLON &kp COLON>;
         };
+
+        /* ── Tmux Macros (prefix: Ctrl+B) ──────────────────────────── */
+
+        /* Pane navigation */
+        tmux_left: tmux_left {              // Ctrl+B Left (navigate left pane)
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings = <&macro_press &kp LCTRL>
+                     , <&macro_tap &kp B>
+                     , <&macro_release &kp LCTRL>
+                     , <&macro_tap &kp LEFT>;
+        };
+
+        tmux_down: tmux_down {              // Ctrl+B Down (navigate down pane)
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings = <&macro_press &kp LCTRL>
+                     , <&macro_tap &kp B>
+                     , <&macro_release &kp LCTRL>
+                     , <&macro_tap &kp DOWN>;
+        };
+
+        tmux_up: tmux_up {                  // Ctrl+B Up (navigate up pane)
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings = <&macro_press &kp LCTRL>
+                     , <&macro_tap &kp B>
+                     , <&macro_release &kp LCTRL>
+                     , <&macro_tap &kp UP>;
+        };
+
+        tmux_right: tmux_right {            // Ctrl+B Right (navigate right pane)
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings = <&macro_press &kp LCTRL>
+                     , <&macro_tap &kp B>
+                     , <&macro_release &kp LCTRL>
+                     , <&macro_tap &kp RIGHT>;
+        };
+
+        /* Window management */
+        tmux_new_win: tmux_new_win {        // Ctrl+B C (create new window)
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings = <&macro_press &kp LCTRL>
+                     , <&macro_tap &kp B>
+                     , <&macro_release &kp LCTRL>
+                     , <&macro_tap &kp C>;
+        };
+
+        tmux_prev_win: tmux_prev_win {      // Ctrl+B P (previous window)
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings = <&macro_press &kp LCTRL>
+                     , <&macro_tap &kp B>
+                     , <&macro_release &kp LCTRL>
+                     , <&macro_tap &kp P>;
+        };
+
+        tmux_next_win: tmux_next_win {      // Ctrl+B N (next window)
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings = <&macro_press &kp LCTRL>
+                     , <&macro_tap &kp B>
+                     , <&macro_release &kp LCTRL>
+                     , <&macro_tap &kp N>;
+        };
+
+        /* Pane management */
+        tmux_split_h: tmux_split_h {        // Ctrl+B % (split pane horizontally)
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings = <&macro_press &kp LCTRL>
+                     , <&macro_tap &kp B>
+                     , <&macro_release &kp LCTRL>
+                     , <&macro_press &kp LSHFT>
+                     , <&macro_tap &kp N5>
+                     , <&macro_release &kp LSHFT>;
+        };
+
+        tmux_split_v: tmux_split_v {        // Ctrl+B " (split pane vertically)
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings = <&macro_press &kp LCTRL>
+                     , <&macro_tap &kp B>
+                     , <&macro_release &kp LCTRL>
+                     , <&macro_press &kp LSHFT>
+                     , <&macro_tap &kp SQT>
+                     , <&macro_release &kp LSHFT>;
+        };
+
+        tmux_zoom: tmux_zoom {              // Ctrl+B Z (toggle pane zoom)
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings = <&macro_press &kp LCTRL>
+                     , <&macro_tap &kp B>
+                     , <&macro_release &kp LCTRL>
+                     , <&macro_tap &kp Z>;
+        };
+
+        tmux_copy: tmux_copy {              // Ctrl+B [ (enter copy mode)
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings = <&macro_press &kp LCTRL>
+                     , <&macro_tap &kp B>
+                     , <&macro_release &kp LCTRL>
+                     , <&macro_tap &kp LBKT>;
+        };
+
+        tmux_kill: tmux_kill {              // Ctrl+B X (kill current pane)
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings = <&macro_press &kp LCTRL>
+                     , <&macro_tap &kp B>
+                     , <&macro_release &kp LCTRL>
+                     , <&macro_tap &kp X>;
+        };
     };
 
 /* ── Combos (Colemak only, disabled on QWERTY for gaming) ───────────── */
+/*
+ * Timing tiers (based on conflict risk with common words):
+ *   Low:    timeout 40ms, idle 150ms  — cross-split or rare bigrams
+ *   Medium: timeout 30ms, idle 175ms  — infrequent same-hand bigrams
+ *   High:   timeout 25ms, idle 200ms  — common word conflicts
+ */
 
     combos {
         compatible = "zmk,combos";
 
-        /* ── Navigation Combos ──────────────────────────────────────── */
+        /* ── Navigation Combos (cross-split, low conflict) ──────────── */
 
-        combo_esc {                         // Q + W = Escape
-            timeout-ms = <45>;
+        combo_esc {                         // Q + L → ESC  ("Quit Left")
+            timeout-ms = <40>;
             require-prior-idle-ms = <150>;
-            key-positions = <1 2>;
+            key-positions = <1 7>;
             layers = <0>;
             bindings = <&kp ESC>;
         };
 
-        combo_tab {                         // W + F = Tab
-            timeout-ms = <45>;
+        combo_tab {                         // W + U → TAB  ("Window Up")
+            timeout-ms = <40>;
             require-prior-idle-ms = <150>;
-            key-positions = <2 3>;
+            key-positions = <2 8>;
             layers = <0>;
             bindings = <&kp TAB>;
         };
 
-        combo_del {                         // L + U = Delete
-            timeout-ms = <45>;
+        combo_bspc {                        // F + U → BSPC ("Fix Undo")
+            timeout-ms = <40>;
             require-prior-idle-ms = <150>;
-            key-positions = <7 8>;
-            layers = <0>;
-            bindings = <&kp DEL>;
-        };
-
-        combo_bspc {                        // Y + ; = Backspace
-            timeout-ms = <45>;
-            require-prior-idle-ms = <150>;
-            key-positions = <9 10>;
+            key-positions = <3 8>;
             layers = <0>;
             bindings = <&kp BSPC>;
         };
 
+        combo_del {                         // P + Y → DEL  ("Purge Yes")
+            timeout-ms = <40>;
+            require-prior-idle-ms = <150>;
+            key-positions = <4 9>;
+            layers = <0>;
+            bindings = <&kp DEL>;
+        };
+
         /* ── High-Frequency Symbol Combos ───────────────────────────── */
 
-        combo_colon {                       // S + T = : (Vim command mode)
-            timeout-ms = <45>;
-            require-prior-idle-ms = <150>;
-            key-positions = <15 16>;
-            layers = <0>;
-            bindings = <&kp COLON>;
-        };
-
-        combo_slash {                       // T + G = / (Vim search, paths, division)
-            timeout-ms = <45>;
-            require-prior-idle-ms = <150>;
-            key-positions = <16 17>;
-            layers = <0>;
-            bindings = <&kp FSLH>;
-        };
-
-        combo_underscore {                  // N + E = _ (snake_case variables)
-            timeout-ms = <45>;
-            require-prior-idle-ms = <150>;
-            key-positions = <19 20>;
+        combo_underscore {                  // U + D → _    ("UnDerscore")
+            timeout-ms = <30>;
+            require-prior-idle-ms = <175>;
+            key-positions = <8 28>;
             layers = <0>;
             bindings = <&kp UNDER>;
         };
 
-        combo_equals {                      // E + I = = (assignments, comparisons)
-            timeout-ms = <45>;
+        combo_colon {                       // C + O → :    ("COlon")
+            timeout-ms = <25>;
+            require-prior-idle-ms = <200>;
+            key-positions = <27 22>;
+            layers = <0>;
+            bindings = <&kp COLON>;
+        };
+
+        combo_slash {                       // F + H → /    ("Forward/Hack")
+            timeout-ms = <40>;
             require-prior-idle-ms = <150>;
-            key-positions = <20 21>;
+            key-positions = <3 31>;
+            layers = <0>;
+            bindings = <&kp FSLH>;
+        };
+
+        combo_equals {                      // E + Q → =    ("EQuals")
+            timeout-ms = <40>;
+            require-prior-idle-ms = <150>;
+            key-positions = <20 1>;
             layers = <0>;
             bindings = <&kp EQUAL>;
         };
 
-        combo_pipe {                        // D + V = | (Unix pipes, logical OR)
-            timeout-ms = <45>;
+        combo_pipe {                        // P + I → |    ("PIPe")
+            timeout-ms = <40>;
             require-prior-idle-ms = <150>;
-            key-positions = <28 29>;
+            key-positions = <4 21>;
             layers = <0>;
             bindings = <&kp PIPE>;
         };
 
         /* ── Multi-Character Operator Combos ────────────────────────── */
 
-        combo_arrow {                       // I + O = -> (Golang, Rust, C)
-            timeout-ms = <45>;
-            require-prior-idle-ms = <150>;
-            key-positions = <21 22>;
+        combo_arrow {                       // A + W → ->   ("ArroW")
+            timeout-ms = <30>;
+            require-prior-idle-ms = <175>;
+            key-positions = <13 2>;
             layers = <0>;
             bindings = <&arrow_op>;
         };
 
-        combo_dbl_colon {                   // O + ' = :: (Rust, C++)
-            timeout-ms = <45>;
+        combo_dbl_colon {                   // C + N → ::   ("C++ Namespace")
+            timeout-ms = <40>;
             require-prior-idle-ms = <150>;
-            key-positions = <22 23>;
+            key-positions = <27 19>;
             layers = <0>;
             bindings = <&dbl_colon>;
         };
 
-        combo_walrus {                      // S + T + G = := (Golang short declaration)
-            timeout-ms = <50>;
+        combo_walrus {                      // W + L → :=   ("WaLrus")
+            timeout-ms = <40>;
             require-prior-idle-ms = <150>;
-            key-positions = <15 16 17>;
+            key-positions = <2 7>;
             layers = <0>;
             bindings = <&walrus_op>;
         };
 
         /* ── Special Symbol Combos ──────────────────────────────────── */
 
-        combo_dollar {                      // A + R = $ (shell, Terraform, regex)
-            timeout-ms = <45>;
+        combo_dollar {                      // D + O → $    ("DOllar")
+            timeout-ms = <40>;
             require-prior-idle-ms = <150>;
-            key-positions = <13 14>;
+            key-positions = <28 22>;
             layers = <0>;
             bindings = <&kp DLLR>;
         };
 
-        combo_ampersand {                   // H + , = & (Golang address-of, bitwise)
-            timeout-ms = <45>;
+        combo_ampersand {                   // A + N → &    ("ANd")
+            timeout-ms = <40>;
             require-prior-idle-ms = <150>;
-            key-positions = <31 32>;
+            key-positions = <13 19>;
             layers = <0>;
             bindings = <&kp AMPS>;
         };
@@ -244,28 +391,28 @@
             >;
         };
 
-        /* Layer 2: Lower (numbers, non-shifted symbols) ────────────  */
+        /* Layer 2: Lower (numbers, symbols left; navigation right) ─  */
         lower_layer {
             bindings = <
 // ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐    ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐
     &kp ESC   &kp N1    &kp N2    &kp N3    &kp N4    &kp N5         &kp N6    &kp N7    &kp N8    &kp N9    &kp N0    &kp BSPC
-    &kp TAB   &kp PRCNT &kp MINUS &kp EQUAL &kp FSLH  &kp BSLH       &kp LPAR  &kp RPAR  &kp LBKT  &kp RBKT  &kp COLON &kp SEMI
-    &kp LSHFT &kp EXCL  &kp UNDER &kp PIPE  &kp PLUS  &kp DQT        &kp LBRC  &kp RBRC  &kp LT    &kp GT    &kp QMARK &kp DEL
+    &kp TAB   &kp PRCNT &kp MINUS &kp EQUAL &kp FSLH  &kp BSLH       &kp LEFT  &kp DOWN  &kp UP    &kp RIGHT &kp COLON &kp SQT
+    &kp LSHFT &kp EXCL  &kp UNDER &kp PIPE  &kp PLUS  &kp DQT        &kp HOME  &kp PGDN  &kp PGUP  &kp END   &none     &kp RET
     &kp LGUI  &kp LALT                      &kp SPACE &trans         &mo 5     &kp SPACE                     &kp RALT  &kp LCTRL
 // └─────────┴─────────┘                    └─────────┴─────────┘    └─────────┴─────────┘                    └─────────┴─────────┘
                                             &kp LEFT  &kp DOWN       &none     &kp UP    &kp RIGHT
             >;
         };
 
-        /* Layer 3: Upper (shifted symbols, navigation, arrows) ─────  */
+        /* Layer 3: Upper (shifted symbols top; tmux left, brackets right) */
         upper_layer {
             bindings = <
-// ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐    ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐
-    &kp TILDE &kp EXCL  &kp AT    &kp HASH  &kp DLLR  &kp PRCNT      &kp CARET &kp AMPS  &kp ASTRK &kp LPAR  &kp RPAR  &kp DEL
-    &kp TAB   &kp DQT   &kp SQT   &kp GRAVE &kp PIPE  &kp BSLH       &kp LEFT  &kp DOWN  &kp UP    &kp RIGHT &kp COLON &none
-    &kp LSHFT &none     &none     &none     &none     &none          &kp HOME  &kp PGDN  &kp PGUP  &kp END   &none     &kp RET
-    &kp LGUI  &kp LALT                      &kp SPACE &mo 5          &trans    &kp SPACE                     &kp RALT  &kp LCTRL
-// └─────────┴─────────┘                    └─────────┴─────────┘    └─────────┴─────────┘                    └─────────┴─────────┘
+// ┌─────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────┐    ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐
+    &kp TILDE &kp EXCL       &kp AT        &kp HASH      &kp DLLR      &kp PRCNT          &kp CARET &kp AMPS  &kp ASTRK &kp LPAR  &kp RPAR  &kp DEL
+    &kp TAB   &tmux_new_win  &tmux_split_h &tmux_split_v &tmux_zoom    &tmux_kill         &kp LPAR  &kp RPAR  &kp LBKT  &kp RBKT  &kp COLON &kp SEMI
+    &kp LSHFT &tmux_left     &tmux_down    &tmux_up      &tmux_right   &tmux_copy         &kp LBRC  &kp RBRC  &kp LT    &kp GT    &kp QMARK &kp DEL
+    &kp LGUI  &kp LALT                                   &kp SPACE     &mo 5              &trans    &kp SPACE                     &kp RALT  &kp LCTRL
+// └─────────┴─────────────┘                             └─────────────┴─────────────┘    └─────────┴─────────┘                    └─────────┴─────────┘
                                             &none     &kp C_BRI_DN   &none     &kp C_BRI_UP &none
             >;
         };
