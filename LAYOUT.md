@@ -32,25 +32,21 @@ LEFT HALF                                   RIGHT HALF
 
 - **Mixed-mode layers:** Layers combine different functional zones per split.
   Layer 2 has symbols on the left and navigation on the right. Layer 3 has
-  tmux commands on the left and brackets on the right. This enables hand
+  the tmux prefix on the left and brackets on the right. This enables hand
   alternation: hold a thumb on one side, operate keys on the other.
 - **Cross-layer coherence:** Layer 2 carries non-shifted symbols and operators;
   shifted symbols (`! @ # $ % ^ & * ( )`) live on Layer 3's number row.
-  `!` and `%` are intentionally duplicated on Layer 2 (pinky positions) for
-  faster access without reaching Layer 3's top row.
-- **Hand balance:** Symbol placement follows Colemak's ~47/53 L/R split,
-  distributing load evenly between hands.
+- **Hand balance:** Symbol placement distributes load evenly between hands.
 - **Navigation on Layer 2 right:** Vim-style arrow keys on the home row with
   page/document navigation directly below in matching directional
   correspondence (LEFT→HOME, DOWN→PGDN, UP→PGUP, RIGHT→END). Accessed
   via LEFT thumb hold (mo 2) + RIGHT hand keys.
-- **Tmux on Layer 3 left:** All tmux operations (pane navigation, window
-  management, splits, zoom, copy mode) via RIGHT thumb hold (mo 3) +
-  LEFT hand keys. Pane navigation mirrors arrow positions.
-- **Mnemonic combos:** All combos use cross-split key pairs with memorable
-  letter hints (e.g., U+D for "UnDerscore", C+O for "COlon").
-- **Combo-first for top symbols:** The highest-frequency programming symbols
-  are accessible via combos on Layer 0 without any layer hold.
+- **Tmux on Layer 3 left:** Tmux prefix macro accessible via RIGHT thumb hold
+  (mo 3) + LEFT hand key (T). After sending the prefix, you can use any
+  standard tmux command.
+- **Minimal combos:** Currently only one combo (S+E for ESC) to avoid
+  accidental triggers during normal typing. Additional combos can be added
+  based on actual usage patterns.
 
 ---
 
@@ -104,12 +100,14 @@ Base typing layer with home row mods (balanced flavor).
 ## Layer 1: QWERTY (Gaming)
 
 Standard QWERTY without home row mods or combos. Switched to via Config layer.
+Includes SOCD (Simultaneous Opposite Cardinal Direction) cleaning for WASD to
+prevent invalid diagonal inputs in games.
 
 ```
 ┌───────┬───────┬───────┬───────┬───────┬───────┐    ┌───────┬───────┬───────┬───────┬───────┬───────┐
-│  ESC  │   Q   │   W   │   E   │   R   │   T   │    │   Y   │   U   │   I   │   O   │   P   │ BSPC  │
+│  ESC  │   Q   │ W/SOCD│   E   │   R   │   T   │    │   Y   │   U   │   I   │   O   │   P   │ BSPC  │
 ├───────┼───────┼───────┼───────┼───────┼───────┤    ├───────┼───────┼───────┼───────┼───────┼───────┤
-│  TAB  │   A   │   S   │   D   │   F   │   G   │    │   H   │   J   │   K   │   L   │   ;   │   '   │
+│  TAB  │A/SOCD │ S/SOCD│D/SOCD │   F   │   G   │    │   H   │   J   │   K   │   L   │   ;   │   '   │
 ├───────┼───────┼───────┼───────┼───────┼───────┤    ├───────┼───────┼───────┼───────┼───────┼───────┤
 │ LSHFT │   Z   │   X   │   C   │   V   │   B   │    │   N   │   M   │   ,   │   .   │   /   │  ESC  │
 ├───────┼───────┼───────┴───────┼───────┼───────┤    ├───────┼───────┼───────┴───────┼───────┼───────┤
@@ -117,6 +115,10 @@ Standard QWERTY without home row mods or combos. Switched to via Config layer.
 └───────┴───────┘               └───────┴───────┘    └───────┴───────┘               └───────┴───────┘
                       D-PAD: Left / Down / (none) / Up / Right
 ```
+
+**SOCD Cleaning:** WASD keys use SOCD resolution to handle simultaneous opposite
+inputs (W+S or A+D). This prevents invalid diagonal movement in games that don't
+handle such inputs properly.
 
 ---
 
@@ -132,28 +134,29 @@ This enables hand alternation: LEFT thumb holds the layer, RIGHT hand navigates.
 ┌───────┬───────┬───────┬───────┬───────┬───────┐    ┌───────┬───────┬───────┬───────┬───────┬───────┐
 │  ESC  │   1   │   2   │   3   │   4   │   5   │    │   6   │   7   │   8   │   9   │   0   │ BSPC  │
 ├───────┼───────┼───────┼───────┼───────┼───────┤    ├───────┼───────┼───────┼───────┼───────┼───────┤
-│  TAB  │   %   │   -   │   =   │   /   │   \   │    │  LEFT │ DOWN  │  UP   │ RIGHT │   :   │   '   │
+│  TAB  │       │   ~   │   _   │   -   │   |   │    │  LEFT │ DOWN  │  UP   │ RIGHT │   :   │   '   │
 ├───────┼───────┼───────┼───────┼───────┼───────┤    ├───────┼───────┼───────┼───────┼───────┼───────┤
-│ LSHFT │   !   │   _   │   |   │   +   │   "   │    │ HOME  │ PGDN  │ PGUP  │  END  │       │  RET  │
+│ LSHFT │       │   `   │   =   │   +   │   "   │    │ HOME  │ PGDN  │ PGUP  │  END  │       │  RET  │
 ├───────┼───────┼───────┴───────┼───────┼───────┤    ├───────┼───────┼───────┴───────┼───────┼───────┤
 │ LGUI  │ LALT  │               │ SPACE │ ▓▓▓▓▓ │    │  mo5  │ SPACE │               │ RALT  │ LCTRL │
 └───────┴───────┘               └───────┴───────┘    └───────┴───────┘               └───────┴───────┘
-                      D-PAD: Left / Down / (none) / Up / Right
+                      D-PAD: C_PREV / C_VOL_DN / C_PP / C_VOL_UP / C_NEXT
 ```
 
 ### Symbol Placement Rationale (Left Split)
 
 **Home row** (strongest → weakest finger):
-- `/` (index) - Division, paths, Vim search
-- `=` (middle) - Assignment, comparison — highest frequency operator
-- `-` (ring) - Subtraction, lists, kebab-case
-- `%` (pinky) - Modulo, Python string formatting, percentage
+- `|` (ring) - Unix pipes, logical OR
+- `_` (middle) - snake_case, Markdown italics
+- `~` (ring) - Home directory, bitwise NOT
+- (empty pinky position)
 
 **Bottom row:**
+- `"` (index) - String literals
 - `+` (index) - Addition
-- `|` (middle) - Unix pipes, logical OR
-- `_` (ring) - snake_case, Markdown italics
-- `!` (pinky) - Negation, shebang, inequality (`!=`)
+- `=` (middle) - Assignment, comparison — highest frequency operator
+- `` ` `` (ring) - Backticks, code blocks, command substitution
+- (empty pinky position)
 
 ### Navigation Cluster (Right Split)
 
@@ -167,12 +170,27 @@ BOTTOM ROW:  HOME   PGDN   PGUP   END
 Each navigation key sits **directly below** its directional counterpart:
 LEFT→HOME, DOWN→PGDN, UP→PGUP, RIGHT→END.
 
+### Media Controls (D-Pad)
+
+The d-pad provides media controls while on Layer 2:
+
+```
+D-PAD Layout:  C_PREV / C_VOL_DN / C_PP / C_VOL_UP / C_NEXT
+               (Prev) / (Vol-)   / (Play)/ (Vol+)   / (Next)
+```
+
+- **Left (44):** Previous track
+- **Down (45):** Volume down
+- **Center (46):** Play/Pause
+- **Up (47):** Volume up
+- **Right (48):** Next track
+
 ---
 
 ## Layer 3: Upper (Shifted Symbols + Tmux + Brackets)
 
 Accessed by holding `mo 3` (position 40, RIGHT thumb). This is the
-**mixed-mode layer**: tmux commands on the left, brackets/delimiters on
+**mixed-mode layer**: tmux prefix on the left, brackets/delimiters on
 the right, shifted number symbols on the top row.
 
 Shifted number symbols on the top row double as `Super+Shift+Number` for
@@ -182,63 +200,65 @@ moving windows between workspaces.
 ┌───────┬───────┬───────┬───────┬───────┬───────┐    ┌───────┬───────┬───────┬───────┬───────┬───────┐
 │   ~   │   !   │   @   │   #   │   $   │   %   │    │   ^   │   &   │   *   │   (   │   )   │  DEL  │
 ├───────┼───────┼───────┼───────┼───────┼───────┤    ├───────┼───────┼───────┼───────┼───────┼───────┤
-│  TAB  │ T:WIN │ T:S-H │ T:S-V │ T:ZOOM│ T:KILL│    │   (   │   )   │   [   │   ]   │   :   │   ;   │
+│  TAB  │       │       │       │ C-b   │       │    │       │   (   │   )   │   [   │   ]   │       │
 ├───────┼───────┼───────┼───────┼───────┼───────┤    ├───────┼───────┼───────┼───────┼───────┼───────┤
-│ LSHFT │ T:←   │ T:↓   │ T:↑   │ T:→   │ T:COPY│    │   {   │   }   │   <   │   >   │   ?   │  DEL  │
+│ LSHFT │       │       │   \   │   /   │       │    │       │   {   │   }   │   <   │   >   │       │
 ├───────┼───────┼───────┴───────┼───────┼───────┤    ├───────┼───────┼───────┴───────┼───────┼───────┤
 │ LGUI  │ LALT  │               │ SPACE │  mo5  │    │ ▓▓▓▓▓ │ SPACE │               │ RALT  │ LCTRL │
 └───────┴───────┘               └───────┴───────┘    └───────┴───────┘               └───────┴───────┘
                       D-PAD: (none) / BRI_DN / (none) / BRI_UP / (none)
 ```
 
-### Tmux Commands (Left Split, prefix: Ctrl+B)
+### Tmux Prefix (Left Split)
 
-**Home row — Window & pane management:**
+The keymap provides a single tmux prefix macro (`Ctrl+B`) rather than full
+tmux command sequences. This gives you maximum flexibility to follow with
+any tmux command.
 
-| Position | Key | Macro         | Tmux Command | Action              |
-|----------|-----|---------------|--------------|----------------------|
-| 13       | A   | tmux_new_win  | `Ctrl+B C`   | Create new window    |
-| 14       | R   | tmux_split_h  | `Ctrl+B %`   | Split pane horizontal|
-| 15       | S   | tmux_split_v  | `Ctrl+B "`   | Split pane vertical  |
-| 16       | T   | tmux_zoom     | `Ctrl+B Z`   | Toggle pane zoom     |
-| 17       | G   | tmux_kill     | `Ctrl+B X`   | Kill current pane    |
+| Position | Key | Macro       | Output     | Use                          |
+|----------|-----|-------------|------------|------------------------------|
+| 16       | T   | tmux_macro  | `Ctrl+B`   | Tmux prefix for all commands |
 
-**Bottom row — Pane navigation (mirrors arrow positions):**
+**Workflow:** 
+1. Hold RIGHT thumb (mo 3)
+2. Tap T to send `Ctrl+B` prefix
+3. Release mo 3
+4. Press your desired tmux command key
 
-| Position | Key | Macro      | Tmux Command   | Action              |
-|----------|-----|------------|----------------|----------------------|
-| 25       | Z   | tmux_left  | `Ctrl+B Left`  | Navigate left pane   |
-| 26       | X   | tmux_down  | `Ctrl+B Down`  | Navigate down pane   |
-| 27       | C   | tmux_up    | `Ctrl+B Up`    | Navigate up pane     |
-| 28       | D   | tmux_right | `Ctrl+B Right` | Navigate right pane  |
-| 29       | V   | tmux_copy  | `Ctrl+B [`     | Enter copy mode      |
-
-**Workflow:** Hold RIGHT thumb (mo 3) → use LEFT hand for tmux operations.
+**Common tmux commands after prefix:**
+- `C` - Create new window
+- `%` - Split pane horizontal
+- `"` - Split pane vertical
+- `Z` - Toggle pane zoom
+- `X` - Kill current pane
+- `←` `↓` `↑` `→` - Navigate panes
+- `[` - Enter copy mode
+- `P` - Previous window
+- `N` - Next window
 
 ### Bracket Pairs (Right Split)
 
 **Home row right:**
-- `( )` (index pair) - Function calls, tuples, precedence
-- `[ ]` (middle/ring) - Arrays, indexing, slices
-- `:` (pinky) - Dicts, type hints, Vim commands
-- `;` (outer pinky) - Statement terminator
+- `( )` (index pair, positions 19-20) - Function calls, tuples, precedence
+- `[ ]` (ring pair, positions 21-22) - Arrays, indexing, slices
 
 **Bottom row right:**
-- `{ }` (index pair) - Code blocks, dicts, structs
-- `< >` (middle/ring) - Comparisons, generics, HTML
-- `?` (pinky) - Ternary, regex, optional
+- `{ }` (index pair, positions 31-32) - Code blocks, dicts, structs
+- `< >` (ring pair, positions 33-34) - Comparisons, generics, HTML
 
 **Bracket pairs** are always adjacent on the same hand for fast inward rolls.
 
+### Additional Symbols (Left Split)
+
+**Bottom row:**
+- `\` (position 27) - Backslash for escaping, paths
+- `/` (position 28) - Forward slash for division, paths, regex
+
 ### Additional Tmux Macros (Unbound)
 
-These macros are defined but not mapped to keys. Use `Ctrl+B` manually or
-bind them to available positions as needed:
-
-| Macro          | Tmux Command | Action               |
-|----------------|--------------|----------------------|
-| tmux_prev_win  | `Ctrl+B P`   | Previous window      |
-| tmux_next_win  | `Ctrl+B N`   | Next window          |
+The keymap currently only defines the tmux prefix macro (`Ctrl+B`). Additional
+tmux command macros can be defined as needed. For complex tmux workflows, 
+consider using the prefix macro followed by manual key presses.
 
 ---
 
@@ -304,84 +324,53 @@ Accessed by holding **both** `mo 2` and `mo 3` simultaneously (tri-layer).
 
 ## Combos (Layer 0 Only)
 
-All combos are Colemak-only (disabled on QWERTY gaming layer). All combos
-use cross-split key pairs with mnemonic letter hints for memorability.
+Combos are Colemak-only (disabled on QWERTY gaming layer). Currently, only
+one combo is defined:
 
-**Timing tiers** based on conflict risk with common English words:
-- **Low** (40ms timeout, 150ms idle) — cross-split or rare bigrams
-- **Medium** (30ms timeout, 175ms idle) — infrequent same-hand bigrams
-- **High** (25ms timeout, 200ms idle) — common word conflicts
+**Timing:** `timeout-ms=40`, `require-prior-idle-ms=150`
 
-### Navigation Combos (Low Conflict)
+### Active Combos
 
 | Combo     | Keys (Colemak) | Positions | Output | Mnemonic     | Use Case              |
 |-----------|----------------|-----------|--------|--------------|-----------------------|
-| Escape    | Q + L          | 1 + 7     | `ESC`  | "Quit Left"  | Vim normal mode       |
-| Tab       | W + U          | 2 + 8     | `TAB`  | "Window Up"  | Indentation, complete |
-| Backspace | F + U          | 3 + 8     | `BSPC` | "Fix Undo"   | Delete backward       |
-| Delete    | P + Y          | 4 + 9     | `DEL`  | "Purge Yes"  | Forward delete        |
+| Escape    | S + E          | 15 + 20   | `ESC`  | Cross-split  | Vim normal mode, exit |
 
-### High-Frequency Symbol Combos
-
-| Combo      | Keys (Colemak) | Positions | Output | Timing | Mnemonic        | Use Case                 |
-|------------|----------------|-----------|--------|--------|-----------------|--------------------------|
-| Underscore | U + D          | 8 + 28    | `_`    | Medium | "UnDerscore"    | snake_case variables     |
-| Colon      | C + O          | 27 + 22   | `:`    | High   | "COlon"         | Vim command, dicts       |
-| Slash      | F + H          | 3 + 31    | `/`    | Low    | "Forward/Hack"  | Vim search, paths        |
-| Equals     | E + Q          | 20 + 1    | `=`    | Low    | "EQuals"        | Assignments, comparisons |
-| Pipe       | P + I          | 4 + 21    | `\|`   | Low    | "PIPe"          | Unix pipes, logical OR   |
-
-### Multi-Character Operator Combos
-
-| Combo        | Keys (Colemak) | Positions | Output | Timing | Mnemonic         | Use Case                 |
-|--------------|----------------|-----------|--------|--------|------------------|--------------------------|
-| Arrow        | A + W          | 13 + 2    | `->`   | Medium | "ArroW"          | Golang, Rust, C pointers |
-| Double Colon | C + N          | 27 + 19   | `::`   | Low    | "C++ Namespace"  | Rust paths, C++ scope    |
-| Walrus       | W + L          | 2 + 7     | `:=`   | Low    | "WaLrus"         | Golang short declaration |
-
-### Special Symbol Combos (Low Conflict)
-
-| Combo     | Keys (Colemak) | Positions | Output | Mnemonic  | Use Case                     |
-|-----------|----------------|-----------|--------|-----------|------------------------------|
-| Dollar    | D + O          | 28 + 22   | `$`    | "DOllar"  | Shell vars, Terraform, regex |
-| Ampersand | A + N          | 13 + 19   | `&`    | "ANd"     | Golang address-of, bitwise   |
+This minimal combo set prioritizes avoiding accidental triggers during normal
+typing. Additional combos can be added as needed based on usage patterns.
 
 ---
 
 ## Symbol Access Matrix
 
-Quick reference for finding any symbol across layers and combos.
+Quick reference for finding any symbol across layers.
 
-| Symbol | Combo         | Layer 2 | Layer 3     | Best Access        |
-|--------|---------------|---------|-------------|--------------------|
-| `:`    | C+O           | pos 22  | pos 22      | Combo (instant)    |
-| `_`    | U+D           | pos 26  | -           | Combo (instant)    |
-| `=`    | E+Q           | pos 15  | -           | Combo (instant)    |
-| `/`    | F+H           | pos 16  | -           | Combo (instant)    |
-| `\|`   | P+I           | pos 27  | -           | Combo (instant)    |
-| `->`   | A+W           | -       | -           | Combo only         |
-| `::`   | C+N           | -       | -           | Combo only         |
-| `:=`   | W+L           | -       | -           | Combo only         |
-| `$`    | D+O           | -       | Shift+4     | Combo (faster)     |
-| `&`    | A+N           | -       | Shift+7     | Combo (faster)     |
-| `-`    | -             | pos 14  | -           | Layer 2            |
-| `\`    | -             | pos 17  | -           | Layer 2            |
-| `( )`  | -             | -       | pos 18-19   | Layer 3            |
-| `[ ]`  | -             | -       | pos 20-21   | Layer 3            |
-| `{ }`  | -             | -       | pos 30-31   | Layer 3            |
-| `< >`  | -             | -       | pos 32-33   | Layer 3            |
-| `"`    | -             | pos 29  | -           | Layer 2            |
-| `'`    | -             | pos 23  | Layer 0     | Layer 0 (pos 23)   |
-| `~`    | -             | -       | pos 0       | Layer 3            |
-| `+`    | -             | pos 28  | -           | Layer 2            |
-| `?`    | -             | -       | pos 34      | Layer 3            |
-| `;`    | -             | -       | pos 23      | Layer 3            |
-| `@`    | -             | -       | Shift+2     | Layer 3 only       |
-| `#`    | -             | -       | Shift+3     | Layer 3 only       |
-| `*`    | -             | -       | Shift+8     | Layer 3 only       |
-| `!`    | -             | pos 25  | Shift+1     | Layer 2            |
-| `%`    | -             | pos 13  | Shift+5     | Layer 2            |
-| `^`    | -             | -       | Shift+6     | Layer 3 only       |
+| Symbol | Layer 0 | Layer 2     | Layer 3     | Best Access        |
+|--------|---------|-------------|-------------|--------------------|
+| `~`    | -       | pos 14      | pos 0       | Layer 2 (pos 14)   |
+| `_`    | -       | pos 15      | -           | Layer 2 (pos 15)   |
+| `-`    | -       | pos 16      | -           | Layer 2 (pos 16)   |
+| `\|`   | -       | pos 17      | -           | Layer 2 (pos 17)   |
+| `` ` `` | -      | pos 26      | -           | Layer 2 (pos 26)   |
+| `=`    | -       | pos 27      | -           | Layer 2 (pos 27)   |
+| `+`    | -       | pos 28      | -           | Layer 2 (pos 28)   |
+| `"`    | -       | pos 29      | -           | Layer 2 (pos 29)   |
+| `:` | -       | pos 22      | -           | Layer 2 (pos 22)   |
+| `'`    | pos 23  | pos 23      | -           | Layer 0 (pos 23)   |
+| `!`    | -       | -           | Shift+1     | Layer 3 (Shift+1)  |
+| `@`    | -       | -           | Shift+2     | Layer 3 (Shift+2)  |
+| `#`    | -       | -           | Shift+3     | Layer 3 (Shift+3)  |
+| `$`    | -       | -           | Shift+4     | Layer 3 (Shift+4)  |
+| `%`    | -       | -           | Shift+5     | Layer 3 (Shift+5)  |
+| `^`    | -       | -           | Shift+6     | Layer 3 (Shift+6)  |
+| `&`    | -       | -           | Shift+7     | Layer 3 (Shift+7)  |
+| `*`    | -       | -           | Shift+8     | Layer 3 (Shift+8)  |
+| `( )`  | -       | -           | pos 19-20   | Layer 3            |
+| `[ ]`  | -       | -           | pos 21-22   | Layer 3            |
+| `{ }`  | -       | -           | pos 31-32   | Layer 3            |
+| `< >`  | -       | -           | pos 33-34   | Layer 3            |
+| `\`    | -       | -           | pos 27      | Layer 3 (pos 27)   |
+| `/`    | -       | -           | pos 28      | Layer 3 (pos 28)   |
+| `;`    | pos 10  | -           | -           | Layer 0 (pos 10)   |
 
 ---
 
@@ -419,40 +408,32 @@ Layer 3 top row has shifted number symbols (`! @ # $ %` etc.), which are
 
 ## Tmux Workflows
 
-All tmux macros send the prefix `Ctrl+B` followed by the tmux command key.
-Access via **RIGHT thumb hold** (mo 3) + **LEFT hand** keys.
+The keymap provides a tmux prefix macro that sends `Ctrl+B`. This gives you
+maximum flexibility to follow with any tmux command.
 
-### Pane Navigation
+### Using the Tmux Prefix
 
-Hold `mo 3` (RIGHT thumb) and use LEFT bottom row (mirrors arrow layout):
+Hold `mo 3` (RIGHT thumb, position 40) + tap `T` (position 16) to send `Ctrl+B`.
+Then release and press your desired tmux command key.
 
-```
-BOTTOM ROW:  T:←    T:↓    T:↑    T:→    T:COPY
-             (Z)    (X)    (C)    (D)    (V)
-```
+### Common Tmux Commands
 
-### Window & Pane Management
+After sending the prefix (`mo 3` + `T`), use these common commands:
 
-Hold `mo 3` (RIGHT thumb) and use LEFT home row:
-
-```
-HOME ROW:  T:WIN   T:S-H   T:S-V   T:ZOOM  T:KILL
-           (A)     (R)     (S)     (T)     (G)
-```
-
-### Common Workflows
-
-| Task                      | Keys                      |
+| Task                      | Keys after prefix         |
 |---------------------------|---------------------------|
-| Navigate to left pane     | Hold mo3 + tap Z          |
-| Navigate to right pane    | Hold mo3 + tap D          |
-| Create new window         | Hold mo3 + tap A          |
-| Split pane horizontally   | Hold mo3 + tap R          |
-| Split pane vertically     | Hold mo3 + tap S          |
-| Toggle zoom current pane  | Hold mo3 + tap T          |
-| Kill current pane         | Hold mo3 + tap G          |
-| Enter copy mode           | Hold mo3 + tap V          |
-| Previous/next window      | Manual: Ctrl+B P / N      |
+| Navigate to left pane     | `←` or `H`                |
+| Navigate to right pane    | `→` or `L`                |
+| Navigate to up pane       | `↑` or `K`                |
+| Navigate to down pane     | `↓` or `J`                |
+| Create new window         | `C`                       |
+| Split pane horizontally   | `%`                       |
+| Split pane vertically     | `"`                       |
+| Toggle zoom current pane  | `Z`                       |
+| Kill current pane         | `X`                       |
+| Enter copy mode           | `[`                       |
+| Previous window           | `P`                       |
+| Next window               | `N`                       |
 
 ---
 
@@ -465,12 +446,8 @@ HOME ROW:  T:WIN   T:S-H   T:S-V   T:ZOOM  T:KILL
 | Home row mods         | require-prior-idle-ms  | 150ms  |
 | Layer-tap (`lt`)      | tapping-term-ms        | 140ms  |
 | Layer-tap (`lt`)      | require-prior-idle-ms  | 150ms  |
-| Combos (low conflict) | timeout-ms             | 40ms   |
-| Combos (med conflict) | timeout-ms             | 30ms   |
-| Combos (high conflict)| timeout-ms             | 25ms   |
-| Combos (low conflict) | require-prior-idle-ms  | 150ms  |
-| Combos (med conflict) | require-prior-idle-ms  | 175ms  |
-| Combos (high conflict)| require-prior-idle-ms  | 200ms  |
+| Combos                | timeout-ms             | 40ms   |
+| Combos                | require-prior-idle-ms  | 150ms  |
 | Macros                | wait-ms / tap-ms       | 10ms   |
 
 ---
